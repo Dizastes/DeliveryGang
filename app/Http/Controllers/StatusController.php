@@ -28,4 +28,11 @@ class StatusController extends Controller
         }
         return view('orders', ['items' => $orders,]);
     }
+
+    public function changeStatus(Request $request) {
+    	$order_id = $request->only('id');
+    	$status = $request->only('status');
+    	$order = Orders::updateOrCreate(['id' => $order_id], ['status' => $status['status']]);
+    	return redirect('/courier');
+    }
 }
