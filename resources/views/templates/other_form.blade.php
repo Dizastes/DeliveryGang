@@ -1,5 +1,5 @@
 @foreach ($items as $order)
-	<form action="orders/change" id="form" method="post">
+	<form action="orders/next" id="form" method="post">
 		@csrf
 		<input type="hidden" value="{{$order->id}}" name="id">
 		<p>{{$order->time}}</p>
