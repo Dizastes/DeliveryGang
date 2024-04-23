@@ -21,7 +21,8 @@ use App\Http\Controllers\cartController;
 Route::get('/', [HomeController::class, "getData"])->name('home');
 
 Route::get('/orders', [StatusController::class, "getOdersData"]);
-Route::post('/orders', [StatusController::class, "changeStatus"]);
+Route::post('/orders/change', [StatusController::class, "changeStatus"])->name('orders.change');
+Route::post('orders/next', [StatusController::class, "setNextStatus"])->name('orders.next');
 
 
 Route::get('welcome', function() {
@@ -46,6 +47,8 @@ Route::post('/cart/add', [cartController::class, 'addToCart'])->name('cart.add')
 Route::get('/cart', [cartController::class, 'showCart'])->name('cart.show');
 Route::post('/cart/clear', [cartController::class, 'clearCart'])->name('cart.clear');
 Route::post('/cart/remove', [cartController::class, 'removeFromCart'])->name('cart.remove');
+
+Route::get('logout', [LoginController::class, "logout"]);
 
 Route::get('/cart/addorder', [cartController::class, 'addOrder']);
 
