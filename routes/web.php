@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\StatusController;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,7 +19,7 @@ use App\Http\Controllers\HomeController;
 
 Route::get('/', [HomeController::class, "getData"]);
 
-Route::get('/courier', [StatusController::class, "getCourierData"]);
+Route::get('/orders', [StatusController::class, "getOdersData"]);
 
 
 Route::get('login', function() {
