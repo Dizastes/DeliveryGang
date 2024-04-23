@@ -21,7 +21,8 @@ use App\Http\Controllers\cartController;
 Route::get('/', [HomeController::class, "getData"])->name('home');
 
 Route::get('/orders', [StatusController::class, "getOdersData"]);
-Route::post('/orders', [StatusController::class, "changeStatus"]);
+Route::post('/orders/change', [StatusController::class, "changeStatus"])->name('orders.change');
+Route::post('orders/next', [StatusController::class, "setNextStatus"])->name('orders.next');
 
 
 Route::get('login', function() {
