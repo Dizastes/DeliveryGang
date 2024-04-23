@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Requests\LoginRequest;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Cookie;
 
 class LoginController extends Controller
 {
@@ -39,16 +40,19 @@ class LoginController extends Controller
     }
 
     protected function respondWithToken($token) {
+		$minutes = \Config::get('jwt.ttl') * 24 * 7;
+		Cookie::queue('Auth', $token, $minutes);
     	return response()->json([
     		'access_token' => $token,
     		'type' => 'Bearer',
-    		'expires_in' => \Config::get('jwt.ttl') * 60
+    		'expires_in' => \Config::get('jwt.ttl') 
     	]);
     }
 
     public function me(Request $request) {
-    	$token = explode(".", $request->bearerToken());
-    	$data = base64_decode($token[1]);
-    	return response()->json($data);
+    	$token = explode(".", $request->cookie('Auth'));
+    	$data = json_decode(base64_decode($token[1]), true);
+		//$tkn = $request->cookie('Auth');
+    	return response()->json($data['role']);
     }
 }
