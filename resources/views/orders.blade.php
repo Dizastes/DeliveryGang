@@ -17,5 +17,26 @@
 		</div>
 	</div>
 	<div class="footer"></div> <!-- блок для footer -->
+	@foreach ($items as $order)
+		<form action="" id="form" method="post">
+			@csrf
+			<input type="hidden" value="{{$order->id}}" name="id">
+			<p>{{$order->time}}</p>
+			<p>{{$order->address}}</p>
+			<p>{{$order->cost}}</p>
+			<select name="status" id="test">
+				<option value="{{$order->status}}">{{$order->status}}</option>
+				<option value="в доставке">в доставке</option>
+				<option value="хуй">хуй</option>
+			</select>
+			<!-- <input type="text" value="123" name="status">
+			<input type="submit"> -->
+		</form>
+	@endforeach
+	<script>
+		document.querySelector("#test").addEventListener('change', function (e) {
+		  document.querySelector('#form').submit();
+		})
+	</script>
 </body>
 </html>

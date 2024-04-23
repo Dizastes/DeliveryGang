@@ -33,6 +33,6 @@ class StatusController extends Controller
     	$order_id = $request->only('id');
     	$status = $request->only('status');
     	$order = Orders::updateOrCreate(['id' => $order_id], ['status' => $status['status']]);
-    	return redirect('/courier');
+    	return redirect('/orders');
     }
 }
