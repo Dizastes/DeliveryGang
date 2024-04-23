@@ -18,6 +18,8 @@ use App\Http\Controllers\HomeController;
 
 Route::get('/', [HomeController::class, "getData"]);
 
+Route::get('/courier', [StatusController::class, "getCourierData"]);
+
 
 Route::get('login', function() {
 	return view('login');

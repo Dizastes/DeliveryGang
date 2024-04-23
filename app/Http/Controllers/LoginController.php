@@ -53,6 +53,6 @@ class LoginController extends Controller
     	$token = explode(".", $request->cookie('Auth'));
     	$data = json_decode(base64_decode($token[1]), true);
 		//$tkn = $request->cookie('Auth');
-    	return response()->json($data['role']);
+    	return response()->json($data);
     }
 }
