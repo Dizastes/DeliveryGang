@@ -24,6 +24,10 @@ Route::get('/orders', [StatusController::class, "getOdersData"]);
 Route::post('/orders', [StatusController::class, "changeStatus"]);
 
 
+Route::get('welcome', function() {
+	return view('welcome');
+});
+
 Route::get('login', function() {
 	return view('login');
 });
