@@ -35,4 +35,8 @@ class StatusController extends Controller
     	$order = Orders::updateOrCreate(['id' => $order_id], ['status' => $status['status']]);
     	return redirect('/orders');
     }
+
+    public function setNextStatus(Request $request) {
+    	
+    }
 }

@@ -43,6 +43,8 @@ Route::get('/cart', [cartController::class, 'showCart'])->name('cart.show');
 Route::post('/cart/clear', [cartController::class, 'clearCart'])->name('cart.clear');
 Route::post('/cart/remove', [cartController::class, 'removeFromCart'])->name('cart.remove');
 
+Route::get('logout', [LoginController::class, "logout"]);
+
 Route::get('/cart/addorder', [cartController::class, 'addOrder']);
 
 // Route::get('')

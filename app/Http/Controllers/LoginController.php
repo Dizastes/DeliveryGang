@@ -30,8 +30,9 @@ class LoginController extends Controller
 
     public function logout()
     {
-    	Auth::logout();
-    	return $this->json(['message' => 'Successfuly logged out']);
+    	// Auth::logout();
+        return redirect('/')->withCookie(Cookie::forget('Auth'));
+    	// return $this->json(['message' => 'Successfuly logged out']);
     }
 
     public function refresh()
