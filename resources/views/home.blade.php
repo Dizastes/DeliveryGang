@@ -19,6 +19,7 @@
 					<form action="/cart/add" method = "post">
 						@csrf
 						<input type="hidden" name = 'id' value = "{{$food->id}}">
+						<!-- Нужна будет картинка -->
 						<p>{{$food->name}}</p>
 						<p>{{$food->ingridients}}</p>
 						<p>{{$food->cost}}</p>
