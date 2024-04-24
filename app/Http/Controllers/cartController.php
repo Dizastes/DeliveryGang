@@ -30,6 +30,27 @@ class cartController extends Controller
         return redirect()->route('home');
     }
 
+    public function addIntoCart(Request $request)
+    {
+        $product = [
+            'id' => $request->input('id'),
+            'quantity' => 1
+        ];
+
+        $cart = Session::get('cart', []);
+
+        if (array_key_exists($product['id'], $cart)) {
+            $cart[$product['id']]['quantity'] += 1;
+        } else {
+            $cart[$product['id']] = $product;
+        }
+
+        Session::put('cart', $cart);
+
+        return redirect()->route('cart.show');
+    }
+
+
     public function showCart()
     {
         $cart = Session::get('cart', []);
@@ -55,7 +76,7 @@ class cartController extends Controller
         }
 
 
-        return view('cart', ['foods' => $foods, 'totalCost' => $totalCost]);
+        return view('cart', ['foods' => $foods, 'totalCost' => $totalCost, 'cart' => $cart]);
     }
 
     public function clearCart()
@@ -84,6 +105,7 @@ class cartController extends Controller
         return redirect()->route('cart.show');
     }
 
+
     public function addOrder(Request $request)
     {
         $order = new Orders();
@@ -91,7 +113,7 @@ class cartController extends Controller
         $token = explode(".", Cookie::get('Auth'));
         $data = json_decode(base64_decode($token[1]), true);
 
-        $order->status = 'Ожидает модерации';
+        $order->status = 'ожидает модерации';
         $order->user_id = $data['id'];
 
         $street = $request->input('street');

@@ -26,17 +26,17 @@ Route::post('orders/next', [StatusController::class, "setNextStatus"])->name('or
 
 
 Route::get('welcome', function() {
-	return view('welcome');
+return view('welcome');
 });
 
 Route::get('login', function() {
-	return view('login');
+return view('login');
 });
 
 Route::post('login', [LoginController::class, "login"]);
 
 Route::get('register', function() {
-	return view('register');
+return view('register');
 });
 
 Route::post('register', [RegisterController::class, "register"]);
@@ -44,9 +44,11 @@ Route::post('register', [RegisterController::class, "register"]);
 Route::get('me', [LoginController::class, 'me']);
 
 Route::post('/cart/add', [cartController::class, 'addToCart'])->name('cart.add');
+Route::post('/cart/addInto', [cartController::class, 'addIntoCart'])->name('cart.addInto');
 Route::get('/cart', [cartController::class, 'showCart'])->name('cart.show');
 Route::post('/cart/clear', [cartController::class, 'clearCart'])->name('cart.clear');
 Route::post('/cart/remove', [cartController::class, 'removeFromCart'])->name('cart.remove');
+Route::post('/cart/removeInto', [cartController::class, 'removeIntoCart'])->name('cart.removeInto');
 
 Route::get('logout', [LoginController::class, "logout"]);
 
