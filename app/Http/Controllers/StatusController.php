@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Orders;
 use App\Models\CourierOrders;
 use Illuminate\Http\Response;
+use App\Events\OrderAccepted;
 class StatusController extends Controller
 {
     public function getOdersData(Request $request)
@@ -28,7 +29,7 @@ class StatusController extends Controller
                 $form_name = 'other';
                 break;
             case 2:
-                $orders = Orders::whereIn('status',['ждет курьера','готовится', 'в очереди'])->get();
+                $orders = Orders::whereIn('status',['готовится', 'в очереди'])->get();
                 $form_name = 'other';
                 break;
             case 3:
@@ -57,7 +58,9 @@ class StatusController extends Controller
     	
     	if ($data['role'] == 1) {
     		if ($status == 'ждет курьера') {
+    			$order = "123";
     			CourierOrders::create(['order_id' => $order_id['id'], 'user_id' => $data['id']]);
+    			event(new OrderAccepted($order));
     		}
     		else {
     			CourierOrders::where('order_id', $order_id['id'])->where('user_id', $data['id'])->delete();

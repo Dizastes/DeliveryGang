@@ -105,7 +105,6 @@ class cartController extends Controller
         return redirect()->route('cart.show');
     }
 
-
     public function addOrder(Request $request)
     {
         $order = new Orders();
@@ -113,7 +112,7 @@ class cartController extends Controller
         $token = explode(".", Cookie::get('Auth'));
         $data = json_decode(base64_decode($token[1]), true);
 
-        $order->status = 'ожидает модерации';
+        $order->status = 'Ожидает модерации';
         $order->user_id = $data['id'];
 
         $street = $request->input('street');

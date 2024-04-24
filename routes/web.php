@@ -5,8 +5,9 @@ use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\StatusController;
+use App\Http\Controllers\lkController;
 use App\Http\Controllers\cartController;
-use App\Http\Controllers\OrderController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -30,14 +31,14 @@ return view('welcome');
 });
 
 Route::get('login', function() {
-return view('login');
-});
+    return view('login');
+})->name('login')->middleware('login');
 
 Route::post('login', [LoginController::class, "login"]);
 
 Route::get('register', function() {
-return view('register');
-});
+    return view('register');
+})->middleware('login');
 
 Route::post('register', [RegisterController::class, "register"]);
 
@@ -45,15 +46,14 @@ Route::get('me', [LoginController::class, 'me']);
 
 Route::post('/cart/add', [cartController::class, 'addToCart'])->name('cart.add');
 Route::post('/cart/addInto', [cartController::class, 'addIntoCart'])->name('cart.addInto');
-Route::get('/cart', [cartController::class, 'showCart'])->name('cart.show');
+Route::get('/cart', [cartController::class, 'showCart'])->name('cart.show')->middleware('jwt');
 Route::post('/cart/clear', [cartController::class, 'clearCart'])->name('cart.clear');
 Route::post('/cart/remove', [cartController::class, 'removeFromCart'])->name('cart.remove');
-Route::post('/cart/removeInto', [cartController::class, 'removeIntoCart'])->name('cart.removeInto');
+
+Route::get('/lk',[lkController::class, 'getInfo'])->name('lk')->middleware('jwt');
 
 Route::get('logout', [LoginController::class, "logout"]);
 
-Route::get('/send-notification', [OrderController::class, 'sendNotification']);
-
-Route::get('/cart/addorder', [cartController::class, 'addOrder']);
+Route::post('/cart/addorder', [cartController::class, 'addOrder']);
 
 // Route::get('')
