@@ -273,3 +273,101 @@ main {
     font-size: 1.6vw;
     margin-left: 5%;
 }
+
+.header_area {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.header_block {
+    display: flex;
+    flex-direction: row;
+    width: 80%;
+    margin-bottom: 4%;
+}
+
+.logo_area {
+    width: 10%;
+}
+
+.name_area {
+    width: 75%;
+    display: flex;
+    align-items: center;
+}
+
+.button_area {
+    width: 15%;
+    display: flex;
+    flex-direction: row;
+}
+
+.order_logo {
+    width: 120px;
+    height: 100px;
+}
+
+.titile h3 {
+    margin: 0;
+    color: green;
+}
+
+.subtitle p {
+    margin: 0;
+}
+
+.profile_button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.profile_img {
+    width: 80px;
+    height: 80px;
+    background-color: green;
+    border-radius: 100%;
+}
+
+.menu_button {
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.profile_button {
+    width: 50%;
+}
+
+.line {
+    border: 2px solid black;
+    margin-bottom: 5px;
+    width: 40%;
+}
+
+.order_line_block {
+    width: 80%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.text {
+    font-size: 30px;
+    vertical-align: bottom;
+}
+
+.line_block {
+    width: 87%;
+    display: flex;
+    align-items: end;
+}
+
+.order_line {
+    border: 7px solid green;
+    width: 100%;
+}
