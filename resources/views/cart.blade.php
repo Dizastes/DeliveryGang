@@ -39,7 +39,7 @@
             <h1>Дополнительно</h1>
             <div class="item"><!-- картинка -->
                 <p>Палочки для суши</p>
-                <form action="cart/removeInto" method="post">
+                <form action="cart/remove" method="post">
                     @csrf
                     <input type="hidden" value=42 name='id'>
                     <button class='minus' type='submit'>-</button>
@@ -52,7 +52,7 @@
                 </form>
                 <div class="item"><!-- картинка -->
                     <p>Соевый соус</p>
-                    <form action="cart/removeInto" method="post">
+                    <form action="cart/remove" method="post">
                         @csrf
                         <input type="hidden" value=43 name='id'>
                         <button class='minus' type='submit'>-</button>
@@ -67,7 +67,7 @@
                 <div class="item"><!-- картинка -->
 
                     <p>Имбирь</p>
-                    <form action="cart/removeInto" method="post">
+                    <form action="cart/remove" method="post">
                         @csrf
                         <input type="hidden" value=44 name='id'>
                         <button class='minus' type='submit'>-</button>
@@ -82,7 +82,7 @@
                 <div class="item"><!-- картинка -->
 
                     <p>Васаби</p>
-                    <form action="cart/removeInto" method="post">
+                    <form action="cart/remove" method="post">
                         @csrf
                         <input type="hidden" value=45 name='id'>
                         <button class='minus' type='submit'>-</button>
