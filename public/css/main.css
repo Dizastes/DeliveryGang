@@ -8,7 +8,7 @@ body {
 }
 
 main {
-    height: 99vh;
+    min-height: 100vh;
 }
 
 .register img {
@@ -142,4 +142,134 @@ main {
     justify-content: center;
     flex-direction: column;
     padding-top: 1%;
+}
+.header-client {
+    margin: 1% auto;
+    width: 80%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.header-client .logo {
+    width: 140px;
+    height: 120px;
+}
+
+.header-client .rest-name {
+    flex-direction: column;
+    align-items: center;
+    margin: auto 0;
+}
+
+.user-icon {
+    background-color: #f9a8c8;
+    border-radius: 50%;
+}
+
+.icons-group {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    align-items: center;
+    justify-content: end;
+}
+
+.icons-group img {
+    display: block;
+    width: 60px;
+    height: 60px;
+}
+
+.icons-group a {
+    padding: 1%;
+}
+
+.client-information {
+    margin: 5% auto;
+    width: 60%;
+    height: 300px;
+    border-radius: 80px;
+    display: flex;
+    flex-direction: column;
+    background-color: #f9a8c8;
+    padding: 20px;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.client-information div {
+    font-size: 1.25vw;
+    width: 80%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.client-information p {
+    display: block;
+}
+
+.orders-client {
+    margin: 5% auto;
+    width: 80%;
+}
+
+.orders-client hr {
+    border: none;
+    color: #630018;
+    background-color: #630018;
+    height: 3px;
+}
+
+.order-history {
+    width: 95%;
+    margin: 2% 5%;
+    display: flex;
+    flex-direction: column;
+}
+
+.order-history .head {
+    color: #630018;
+    font-size: 1.5vw;
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+}
+
+.order-history .head p {
+    margin: auto 0;
+}
+
+.btn:focus {
+    box-shadow: none;
+    border: none;
+    outline: none;
+}
+
+.order-status {
+    width: max-content;
+    height: max-content;
+    border-radius: 70px;
+    background-color: #ffd978;
+    text-align: center;
+    margin: 0 0 0 auto !important;
+    font-size: 1.25vw;
+    padding: 1%;
+}
+
+.order-details {
+    color: #630018 !important;
+    font-size: 1.25vw;
+    margin: 0 auto;
+    width: 80%;
+    border: none !important;
+}
+
+.order-history .total-price {
+    font-weight: bold;
+    color: #630018;
+    font-size: 1.6vw;
+    margin-left: 5%;
 }
