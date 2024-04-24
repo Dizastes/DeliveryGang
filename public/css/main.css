@@ -4,16 +4,24 @@
 }
 
 body {
-    width: 80%;
-    margin: 0 auto 0 auto;
-    font-family: KyivType Sans;
+    font-family: KyivType Sans !important;
 }
 
-.logo {
+main {
+    height: 99vh;
+}
+
+.register img {
     width: 140px;
     height: 120px;
     gap: 0px;
     opacity: 0px;
+}
+
+.login img {
+    width: 232px;
+    height: 197px;
+    margin: 5% auto 0;
 }
 
 .rest-name,
@@ -78,7 +86,8 @@ body {
 
 .register-form input[type="text"] {
     font-size: 24px;
-    width: 612px;
+    width: 31vw;
+    min-width: 360px;
     height: 40px;
     gap: 0px;
     border-radius: 70px;
@@ -86,12 +95,15 @@ body {
     padding-left: 2%;
     outline: none;
     background: #efefef;
+    margin: 0 auto;
 }
 
-.register-form input[type="submit"] {
-    width: 202px;
-    background: #c5eafa;
-    height: 66px;
+.register-form input[type="submit"],
+.link-btn {
+    width: 25vw;
+    min-width: 300px;
+    height: 40px;
+    background: #ffb2d2;
     gap: 0px;
     border: none;
     outline: none;
@@ -99,7 +111,35 @@ body {
     font-size: 24px;
     font-weight: 350;
     line-height: 28.8px;
-    text-align: left;
-    text-align: center;
+    justify-content: center;
     margin: 30px auto 0 auto;
+}
+
+.register-form input[type="submit"]:hover {
+    background: #f9a8c8;
+    color: white;
+}
+
+.link-btn {
+    display: block;
+    text-decoration: none;
+    background: #c5eafa;
+    line-height: revert;
+}
+
+.link-btn:hover {
+    color: white;
+    background: #a7d3f8;
+}
+
+.m-footer {
+    color: white;
+    background-color: #777777;
+}
+
+.info {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    padding-top: 1%;
 }
