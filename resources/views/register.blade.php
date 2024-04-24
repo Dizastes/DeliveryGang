@@ -22,9 +22,9 @@
 	<main>
 		<form action="register" method="post" class="register-form">
 			@csrf
-			<label>логин</label>
-			<input type="text" name="name" placeholder="">
 			<label>имя</label>
+			<input type="text" name="name" placeholder="">
+			<label>логин</label>
 			<input type="text" name="login" placeholder="">
 			<label>e-mail</label>
 			<input type="text" name="email" placeholder="">

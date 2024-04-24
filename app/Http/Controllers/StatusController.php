@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Orders;
+use App\Models\CourierOrders;
 use Illuminate\Http\Response;
 class StatusController extends Controller
 {
@@ -16,7 +17,14 @@ class StatusController extends Controller
         // return response()->json($data);
         switch($data['role']) {
             case 1:
-                $orders = Orders::whereIn('status',['ждет курьера','в доставке'])->get();
+            	$orders_id = CourierOrders::where('user_id', $data['id'])->get();
+            	$id_array = [];
+
+            	foreach ($orders_id as $row) {
+            		$id_array[] = $row['order_id'];
+            	}
+
+                $orders = Orders::whereIn('status',['ждет курьера'])->OrwhereIn('id', $id_array)->get();
                 $form_name = 'other';
                 break;
             case 2:
@@ -41,10 +49,22 @@ class StatusController extends Controller
     }
 
     public function setNextStatus(Request $request) {
-    	$status_list = ['ожидает модерации', 'в очереди', 'готовится', 'ждет курьера', 'в доставке', 'получен'];
+    	$token = explode(".", $request->cookie('Auth'));
+    	$data = json_decode(base64_decode($token[1]), true);
 
     	$order_id = $request->only('id');
     	$status = $request->only('status_button')['status_button'];
+    	
+    	if ($data['role'] == 1) {
+    		if ($status == 'ждет курьера') {
+    			CourierOrders::create(['order_id' => $order_id['id'], 'user_id' => $data['id']]);
+    		}
+    		else {
+    			CourierOrders::where('order_id', $order_id['id'])->where('user_id', $data['id'])->delete();
+    		}
+    	}
+
+    	$status_list = ['ожидает модерации', 'в очереди', 'готовится', 'ждет курьера', 'в доставке', 'получен'];
 
     	$index = array_search($status, $status_list);
     	if ($index == count($status_list) - 1 ) {
