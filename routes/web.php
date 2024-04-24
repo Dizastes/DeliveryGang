@@ -6,7 +6,7 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\StatusController;
 use App\Http\Controllers\cartController;
-
+use App\Http\Controllers\OrderController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -51,6 +51,8 @@ Route::post('/cart/remove', [cartController::class, 'removeFromCart'])->name('ca
 Route::post('/cart/removeInto', [cartController::class, 'removeIntoCart'])->name('cart.removeInto');
 
 Route::get('logout', [LoginController::class, "logout"]);
+
+Route::get('/send-notification', [OrderController::class, 'sendNotification']);
 
 Route::get('/cart/addorder', [cartController::class, 'addOrder']);
 
