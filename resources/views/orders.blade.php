@@ -30,7 +30,7 @@
 		var channel = pusher.subscribe('order-accepted-channel');
 		channel.bind('App\\Events\\OrderAccepted', function(data) {
 	  // Здесь вы можете обработать данные, переданные событием
-		  console.log('Received data:', data);
+		  // console.log('Received data:', data);
 		  window.location.reload();
 		});
 	</script>

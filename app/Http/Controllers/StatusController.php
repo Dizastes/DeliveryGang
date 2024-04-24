@@ -46,6 +46,10 @@ class StatusController extends Controller
     	$order_id = $request->only('id');
     	$status = $request->only('status');
     	$order = Orders::updateOrCreate(['id' => $order_id], ['status' => $status['status']]);
+
+    	$courier_orders = CourierOrders::where("order_id", $order_id['id'])->delete();
+
+    	event(new OrderAccepted($order));
     	return redirect('/orders');
     }
 
@@ -60,7 +64,6 @@ class StatusController extends Controller
     		if ($status == 'ждет курьера') {
     			$order = "123";
     			CourierOrders::create(['order_id' => $order_id['id'], 'user_id' => $data['id']]);
-    			event(new OrderAccepted($order));
     		}
     		else {
     			CourierOrders::where('order_id', $order_id['id'])->where('user_id', $data['id'])->delete();
@@ -71,11 +74,13 @@ class StatusController extends Controller
 
     	$index = array_search($status, $status_list);
     	if ($index == count($status_list) - 1 ) {
+    		event(new OrderAccepted($order));
     		return redirect('orders');
     	}
     	else {
     		$status = $status_list[$index + 1];
     		$order = Orders::updateOrCreate(['id' => $order_id], ['status' => $status]);
+    		event(new OrderAccepted($order));
     		return redirect('/orders');
     	}
     }
