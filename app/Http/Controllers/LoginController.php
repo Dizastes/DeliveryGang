@@ -31,11 +31,11 @@ class LoginController extends Controller
     public function logout()
     {
     	// Auth::logout();
-        return redirect('/')->withCookie(Cookie::forget('Auth'));
+        return redirect('/login')->withCookie(Cookie::forget('Auth'));
     	// return $this->json(['message' => 'Successfuly logged out']);
     }
 
-    public function refresh()
+    public function refresh(Request $request)
     {
     	return $this->respondWithToken(Auth::refresh());
     }
@@ -46,7 +46,7 @@ class LoginController extends Controller
     	return response()->json([
     		'access_token' => $token,
     		'type' => 'Bearer',
-    		'expires_in' => \Config::get('jwt.ttl') 
+    		'expires_in' => \Config::get('jwt.ttl')
     	]);
     }
 
