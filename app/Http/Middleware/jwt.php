@@ -7,7 +7,6 @@ use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Illuminate\Support\Facades\Cookie;
 
-
 class jwt
 {
     public function handle(Request $request, Closure $next): Response
@@ -22,7 +21,7 @@ class jwt
         $currentTimestamp = time(); 
 
         if ($currentTimestamp >= $expirationTime) {
-            return redirect()->route('login');
+            return redirect('logout');
         }
         return $next($request);
     }
