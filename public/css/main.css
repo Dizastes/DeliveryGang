@@ -1,0 +1,145 @@
+@font-face {
+    font-family: "KyivType Sans";
+    src: url("fonts/KyivTypeSans-VarGX.ttf");
+}
+
+body {
+    font-family: KyivType Sans !important;
+}
+
+main {
+    height: 99vh;
+}
+
+.register img {
+    width: 140px;
+    height: 120px;
+    gap: 0px;
+    opacity: 0px;
+}
+
+.login img {
+    width: 232px;
+    height: 197px;
+    margin: 5% auto 0;
+}
+
+.rest-name,
+.register img {
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+.rest-name h1 {
+    width: 358px;
+    height: 58px;
+    top: 123px;
+    left: 848px;
+    gap: 0px;
+    opacity: 0px;
+    margin: 0;
+    font-size: 48px;
+    font-weight: 350;
+    line-height: 57.6px;
+    text-align: left;
+}
+
+.rest-name p {
+    font-size: 32px;
+    font-weight: 350;
+    line-height: 38.4px;
+    text-align: left;
+    margin: 0;
+    width: 329px;
+    height: 44px;
+    top: 181px;
+    left: 848px;
+    gap: 0px;
+    opacity: 0px;
+}
+
+.register {
+    margin-top: 5%;
+    display: flex;
+    justify-content: center;
+}
+
+.register-form {
+    width: max-content;
+    display: flex;
+    flex-direction: column;
+    margin: 80px auto 80px auto;
+}
+
+.register-form label {
+    width: max-content;
+    height: 34px;
+    margin-left: 20px;
+    gap: 0px;
+    opacity: 0px;
+    color: #5e5bf0;
+    font-size: 24px;
+    font-weight: 350;
+    line-height: 28.8px;
+    text-align: left;
+}
+
+.register-form input[type="text"] {
+    font-size: 24px;
+    width: 31vw;
+    min-width: 360px;
+    height: 40px;
+    gap: 0px;
+    border-radius: 70px;
+    border: none;
+    padding-left: 2%;
+    outline: none;
+    background: #efefef;
+    margin: 0 auto;
+}
+
+.register-form input[type="submit"],
+.link-btn {
+    width: 25vw;
+    min-width: 300px;
+    height: 40px;
+    background: #ffb2d2;
+    gap: 0px;
+    border: none;
+    outline: none;
+    border-radius: 80px;
+    font-size: 24px;
+    font-weight: 350;
+    line-height: 28.8px;
+    justify-content: center;
+    margin: 30px auto 0 auto;
+}
+
+.register-form input[type="submit"]:hover {
+    background: #f9a8c8;
+    color: white;
+}
+
+.link-btn {
+    display: block;
+    text-decoration: none;
+    background: #c5eafa;
+    line-height: revert;
+}
+
+.link-btn:hover {
+    color: white;
+    background: #a7d3f8;
+}
+
+.m-footer {
+    color: white;
+    background-color: #777777;
+}
+
+.info {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    padding-top: 1%;
+}
