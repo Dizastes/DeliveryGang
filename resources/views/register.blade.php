@@ -1,9 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 	@include('templates.include')
 	<title>Регистрация</title>
 </head>
+
 <body>
 	<header class="header-rest register">
 		<img src="{{ asset('images/logo.png') }}" class="logo">
@@ -40,4 +42,5 @@
 	</main>
 	@include('templates.footer')
 </body>
+
 </html>
