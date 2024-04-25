@@ -58,6 +58,7 @@ class cartController extends Controller
         $cart = Session::get('cart', []);
         $totalCost = 0;
         $foods = [];
+        $user['role'] = 0;
         foreach ($cart as $food) {
             $f = DB::table('food')->where('id', $food['id'])->get();
             $foodTemp['id'] = $f[0]->id;
@@ -79,7 +80,7 @@ class cartController extends Controller
         }
 
 
-        return view('cart', ['foods' => $foods, 'totalCost' => $totalCost, 'cart' => $cart]);
+        return view('cart', ['foods' => $foods, 'totalCost' => $totalCost, 'cart' => $cart, 'user' => $user]);
     }
 
     public function clearCart()

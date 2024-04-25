@@ -638,3 +638,15 @@ main {
 .time-to-delivery label {
     width: 80% !important;
 }
+
+@media (max-width: 600px) {
+    .order-workers {
+        display: flex !important;
+        flex-direction: column !important;
+    }
+
+    .accepted-btn input {
+        font-size: 16px;
+        height: 60px;
+    }
+}

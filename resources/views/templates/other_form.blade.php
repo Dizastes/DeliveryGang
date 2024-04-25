@@ -1,6 +1,6 @@
 @foreach ($items as $order)
     <form action="orders/next" id="form" method="post" class="orders-form">
-        <div class="order-workers container d-flex flex-row">
+        <div class="order-workers">
             <div class="decor-elem"></div>
             @csrf
             <input type="hidden" value="{{ $order['id'] }}" name="id">
@@ -25,7 +25,7 @@
                     \/
                 </button>
             </div>
-            <div class="row">
+            <div class="row accepted-btn">
                 <input type="submit" value="{{ $order['status'] }}" name="status_button" class="order-status">
             </div>
         </div>

@@ -25,50 +25,49 @@ Route::get('/showInfo', [HomeController::class, "showFullInfo"]);
 
 Route::middleware(['login'])->group(function () {
 
-	Route::get('register', function () {
-	    return view('register');
-	});
-	Route::post('register', [RegisterController::class, "register"]);
+    Route::get('register', function () {
+        return view('register');
+    });
+    Route::post('register', [RegisterController::class, "register"]);
 
-	Route::get('login', function () {
-	    return view('login');
-	})->name('login');
-	Route::post('login', [LoginController::class, "login"]);
-
-	Route::get('logout', [LoginController::class, "logout"]);
+    Route::get('login', function () {
+        return view('login');
+    })->name('login');
+    Route::post('login', [LoginController::class, "login"]);
 });
 
 Route::middleware(['jwt'])->group(function () {
 
     Route::post('/addIngridient', [HomeController::class, "addIngridient"]);
-	Route::post('/addNewIngridient', [HomeController::class, "addIngridientNewFood"]);
-	Route::post('/deleteIngridient', [HomeController::class, "deleteIngridient"]);
-	Route::post('/deleteNewIngridient', [HomeController::class, "deleteIngridientNewFood"]);
+    Route::post('/addNewIngridient', [HomeController::class, "addIngridientNewFood"]);
+    Route::post('/deleteIngridient', [HomeController::class, "deleteIngridient"]);
+    Route::post('/deleteNewIngridient', [HomeController::class, "deleteIngridientNewFood"]);
 
-	Route::get('/NewFood', [HomeController::class, "getModalForAddNewFood"]);
-	Route::post('/NewFood', [HomeController::class, "getModalForAddNewFood"]);
+    Route::get('/NewFood', [HomeController::class, "getModalForAddNewFood"]);
+    Route::post('/NewFood', [HomeController::class, "getModalForAddNewFood"]);
 
-	Route::get('/deleteFood', [HomeController::class, "deleteFood"]);	
-	Route::post('/addNewFood', [HomeController::class, "AddNewFood"]);
+    Route::get('/deleteFood', [HomeController::class, "deleteFood"]);
+    Route::post('/addNewFood', [HomeController::class, "AddNewFood"]);
 
-	Route::get('/changeName', [HomeController::class, "changeName"]);
-	Route::post('/changeName', [HomeController::class, "changeName"]);
-	Route::get('/changeCost', [HomeController::class, "changeCost"]);
-	Route::post('/changeCost', [HomeController::class, "changeCost"]);
+    Route::get('/changeName', [HomeController::class, "changeName"]);
+    Route::post('/changeName', [HomeController::class, "changeName"]);
+    Route::get('/changeCost', [HomeController::class, "changeCost"]);
+    Route::post('/changeCost', [HomeController::class, "changeCost"]);
 
-	Route::get('/orders', [StatusController::class, "getOdersData"]);
-	Route::post('/orders/change', [StatusController::class, "changeStatus"])->name('orders.change');
-	Route::post('orders/next', [StatusController::class, "setNextStatus"])->name('orders.next');
+    Route::get('/orders', [StatusController::class, "getOdersData"]);
+    Route::post('/orders/change', [StatusController::class, "changeStatus"])->name('orders.change');
+    Route::post('orders/next', [StatusController::class, "setNextStatus"])->name('orders.next');
 
-	Route::get('/cart', [cartController::class, 'showCart'])->name('cart.show');
-	Route::post('/cart/add', [cartController::class, 'addToCart'])->name('cart.add');
-	Route::post('/cart/addInto', [cartController::class, 'addIntoCart'])->name('cart.addInto');
-	Route::post('/cart/clear', [cartController::class, 'clearCart'])->name('cart.clear');
-	Route::post('/cart/remove', [cartController::class, 'removeFromCart'])->name('cart.remove');
-	Route::post('/cart/addorder', [cartController::class, 'addOrder']);
+    Route::get('/cart', [cartController::class, 'showCart'])->name('cart.show');
+    Route::post('/cart/add', [cartController::class, 'addToCart'])->name('cart.add');
+    Route::post('/cart/addInto', [cartController::class, 'addIntoCart'])->name('cart.addInto');
+    Route::post('/cart/clear', [cartController::class, 'clearCart'])->name('cart.clear');
+    Route::post('/cart/remove', [cartController::class, 'removeFromCart'])->name('cart.remove');
+    Route::post('/cart/addorder', [cartController::class, 'addOrder']);
 
-	Route::get('/lk', [lkController::class, 'getInfo'])->name('lk');
+    Route::get('/lk', [lkController::class, 'getInfo'])->name('lk');
 
-	Route::get('/role', [HomeController::class, "returnRoleManager"]);
-	Route::post('role/changeRole', [HomeController::class, "changeRole"]);
+    Route::get('/role', [HomeController::class, "returnRoleManager"]);
+    Route::post('role/changeRole', [HomeController::class, "changeRole"]);
+    Route::get('logout', [LoginController::class, "logout"]);
 });
