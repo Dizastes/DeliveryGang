@@ -10,19 +10,20 @@ use Illuminate\Http\Response;
 
 class RegisterController extends Controller
 {
-    public function register(RegisterRequest $request) {
+    public function register(RegisterRequest $request)
+    {
 
-    	$userData = $request->createDTO();
+        $userData = $request->createDTO();
 
-    	$user = User::create([
+        $user = User::create([
             'name' => $userData->name,
             'email' => $userData->email,
             'password' => bcrypt($userData->password),
             'login' => $userData->login,
             'number' => $userData->number,
-            'birth'=> $userData->date,
+            'birth' => $userData->date,
         ]);
 
-        return response()->json($user, Response::HTTP_CREATED);
+        return redirect('/login');
     }
 }

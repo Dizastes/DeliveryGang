@@ -59,11 +59,12 @@ class cartController extends Controller
         $totalCost = 0;
         $foods = [];
         foreach ($cart as $food) {
-            $f = DB::table('food')->where('id', $food['id'])->get();    
+            $f = DB::table('food')->where('id', $food['id'])->get();
             $foodTemp['id'] = $f[0]->id;
             $foodTemp['quantity'] = $food['quantity'];
             $foodTemp['cost'] = $f[0]->cost;
             $foodTemp['name'] = $f[0]->name;
+            $foodTemp['photo'] = $f[0]->photo;
             $temp = '';
             $foodIngridients = DB::table('food_ingridient')->select('ingridient_id')->where('food_id', $f[0]->id)->get();
             foreach ($foodIngridients as $ingridient) {
@@ -73,7 +74,7 @@ class cartController extends Controller
                     $temp .= DB::table('ingridient')->select('name')->where('id', $ingridient->ingridient_id)->value('name');
             }
             $foodTemp['ingridients'] = $temp;
-            array_push($foods,$foodTemp);
+            array_push($foods, $foodTemp);
             $totalCost += intval($f[0]->cost) * $food['quantity'];
         }
 
@@ -144,7 +145,7 @@ class cartController extends Controller
         }
 
         Session::forget('cart');
-        
+
         event(new OrderAccepted($order));
         return redirect()->route('home');
     }

@@ -28,6 +28,9 @@
                             </form>
                         </div>
                     @endif
+                    @if ($role != '0')
+                        <a href="/orders"><img class="row" src="{{ asset('images/order.png') }}"></a>
+                    @endif
                     <a href="/cart"><img class="row" src="{{ asset('images/shoper.png') }}"></a>
                     <a href="/lk"><img class="row user-icon" src="{{ asset('images/icon.png') }}"></a>
                 @else
@@ -128,7 +131,7 @@
                                 @else
                                     <form action="/cart/add" method="post">
                             @endif
-                            @if (!$role == 3)
+                            @if ($role != 3)
                                 @csrf
                             @endif
                             <input type="hidden" name='id' value="{{ $food->id }}">

@@ -139,6 +139,7 @@ main {
 }
 
 .m-footer {
+    margin-top: 100px;
     color: white;
     background-color: #777777;
 }
@@ -255,6 +256,8 @@ main {
 }
 
 .order-status {
+    border: none;
+    outline: none;
     width: max-content;
     height: max-content;
     border-radius: 70px;
@@ -263,6 +266,10 @@ main {
     margin: 0 0 0 auto !important;
     font-size: 1.25vw;
     padding: 1%;
+}
+
+.order-status:hover {
+    opacity: 50%;
 }
 
 .order-details {
@@ -508,4 +515,126 @@ main {
     height: 32vh;
     border-radius: 5%;
     object-fit: cover;
+}
+
+.cartes img {
+    width: 10vw;
+    height: 10vw;
+    border-radius: 10%;
+}
+
+.cartes {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.cartes div {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 0 1%;
+}
+
+.minus-to-plus * {
+    width: max-content;
+}
+
+.minus-to-plus h5 {
+    margin: 0 5%;
+}
+
+.additionally img {
+    width: 10vw;
+    height: 10vw;
+    object-fit: cover;
+}
+
+.additionally {
+    width: 15vw;
+    height: 15vw;
+    display: flex;
+    flex-direction: column;
+    background-color: #f9a8c8;
+    border-radius: 10%;
+    justify-content: center;
+    align-items: center;
+}
+
+.additionally * {
+    width: max-content;
+}
+
+.extra {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.add-to-remove {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.add-to-remove p {
+    margin: 0 10%;
+}
+
+.total-summ {
+    font-size: 1.5vw;
+    text-align: right;
+    margin-right: 5%;
+}
+.address-form {
+    padding: 1% 10%;
+    width: 90%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.comment-to-order {
+    padding: 2% 0;
+    width: 100% !important;
+}
+
+.comment-to-order input,
+.comment-to-order label {
+    height: 5vh;
+    width: 100%;
+    text-align: left;
+}
+
+.address-form div {
+    width: 24%;
+}
+
+.address-form input {
+    width: 100%;
+    background-color: #d9d9d9;
+    border-radius: 70px;
+    border: none;
+    outline: none;
+    padding: 2% 2%;
+}
+
+.address-form label {
+    font-size: 1.5vw;
+}
+
+.time-to-delivery {
+    width: 50% !important;
+    height: max-content;
+    padding: 0;
+    margin: 0 1% !important;
+}
+
+.time-to-delivery label {
+    width: 80% !important;
 }

@@ -7,7 +7,11 @@
         </div>
     </div>
     <div class="container d-flex flex-row icons-group">
+        @if ($user['role'] != '0')
+            <a href="/orders"><img class="row" src="{{ asset('images/order.png') }}"></a>
+        @endif
         <a href="/cart"><img class="row" src="{{ asset('images/shoper.png') }}"></a>
         <a href="/lk"><img class="row user-icon" src="{{ asset('images/icon.png') }}"></a>
+        <a href="/logout"><img class="row" src="{{ asset('images/logout.png') }}"></a>
     </div>
 </header>

@@ -21,6 +21,7 @@ class lkController extends Controller
         $user['number'] = $userInfo[0]->number;
         $user['email'] = $userInfo[0]->email;
         $user['birth'] = $userInfo[0]->birth;
+        $user['role'] = $userInfo[0]->privilege;
 
         $orderDB = Orders::where('user_id', $id)->get();
         $orders = [];
