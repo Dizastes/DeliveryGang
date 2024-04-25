@@ -1,10 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
 
+
 <head>
     @include('templates.include')
     <title>Регистрация</title>
 </head>
+
 
 <body>
     <header class="header-rest register">
@@ -46,5 +48,6 @@
     </main>
     @include('templates.footer')
 </body>
+
 
 </html>

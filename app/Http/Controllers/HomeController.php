@@ -7,6 +7,11 @@ use App\Models\Food;
 use App\Models\Ingridient;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
+use App\Models\User;
+use Illuminate\Http\Response;
+use App\Http\Requests\AddFoodRequest;
+use App\Http\Requests\ChangeNameRequest;
+use App\Http\Requests\ChangeCostRequest;
 
 class HomeController extends Controller
 {
@@ -47,6 +52,9 @@ class HomeController extends Controller
     public function getRole(Request $request)
     {
         $token = explode(".", $request->cookie('Auth'));
+        if (count($token)!=3) {
+            return 0;
+        }
         $data = json_decode(base64_decode($token[1]), true);
         $role = $data['role'];
         return $role;
@@ -215,7 +223,7 @@ class HomeController extends Controller
         return view('home', ['foods' => $foods, 'role' => $role, 'modal' => $modal, 'newIngridients' => $newIngridients, 'ingridients' => $ingridients]);
     }
 
-    public function AddNewFood(Request $request)
+    public function AddNewFood(AddFoodRequest $request)
     {
         $foods = $this->getFoods();
         $role = $this->getRole($request);
@@ -241,4 +249,58 @@ class HomeController extends Controller
         return view('home', ['foods' => $foods, 'role' => $role]);
     }
     
+    public function returnRoleManager(Request $request) {
+        $role = $this->getRole($request);
+
+        if ($role != 3) {
+            return response()->json(['status' => Response::HTTP_FORBIDDEN]);
+        }
+        else {
+            $users = User::all();
+        }
+        return view('role', ['role' => $role, 'users' => $users]);
+    }
+    
+    public function changeRole(Request $request) {
+        $user_id = $request->only('id')['id'];
+        $new_role = $request->only('new_role')['new_role'];
+        
+        $role = User::updateOrCreate(['id' => $user_id], ['privilege' => $new_role]);
+
+        return redirect('role');
+    }
+
+    public function changeName(ChangeNameRequest $request) 
+    {
+        $id = $request->input('id');
+        $name = $request->input('name');
+        Food::updateOrCreate(['id' => $id],['name' => $name]);
+
+        $foods = $this->getFoods();
+        $role = $this->getRole($request);
+
+        $temp = $this->getModal($request);
+        $del = $temp[0];
+        $ingridientsIn = $temp[1];
+        $ingridients = $temp[2];
+
+        return view('home', ['foods' => $foods, 'role' => $role, 'del' => $del, 'ingridientsIn' => $ingridientsIn, 'ingridients' => $ingridients]);
+    }
+
+    public function changeCost(ChangeCostRequest $request) 
+    {
+        $id = $request->input('id');
+        $cost = $request->input('cost');
+        Food::updateOrCreate(['id' => $id],['cost' => $cost]);
+
+        $foods = $this->getFoods();
+        $role = $this->getRole($request);
+
+        $temp = $this->getModal($request);
+        $del = $temp[0];
+        $ingridientsIn = $temp[1];
+        $ingridients = $temp[2];
+
+        return view('home', ['foods' => $foods, 'role' => $role, 'del' => $del, 'ingridientsIn' => $ingridientsIn, 'ingridients' => $ingridients]);
+    }
 }

@@ -26,8 +26,13 @@ Route::post('/addNewIngridient', [HomeController::class, "addIngridientNewFood"]
 Route::post('/deleteIngridient', [HomeController::class, "deleteIngridient"]);
 Route::post('/deleteNewIngridient', [HomeController::class, "deleteIngridientNewFood"]);
 Route::post('/addNewFood', [HomeController::class, "AddNewFood"]);
+Route::post('/changeName', [HomeController::class, "changeName"]);
+Route::post('/changeCost', [HomeController::class, "changeCost"]);
+Route::get('/changeName', [HomeController::class, "changeName"]);
+Route::get('/changeCost', [HomeController::class, "changeCost"]);
 
 Route::post('/NewFood', [HomeController::class, "getModalForAddNewFood"]);
+Route::get('/NewFood', [HomeController::class, "getModalForAddNewFood"]);
 
 Route::get('/orders', [StatusController::class, "getOdersData"]);
 Route::post('/orders/change', [StatusController::class, "changeStatus"])->name('orders.change');
@@ -63,5 +68,9 @@ Route::get('/lk',[lkController::class, 'getInfo'])->name('lk')->middleware('jwt'
 Route::get('logout', [LoginController::class, "logout"]);
 
 Route::post('/cart/addorder', [cartController::class, 'addOrder']);
+
+Route::get('/role', [HomeController::class, "returnRoleManager"]);
+
+Route::post('role/changeRole', [HomeController::class, "changeRole"]);
 
 // Route::get('')
