@@ -14,12 +14,16 @@
 	<header>
 		@if (!(isset($modal)))
 		<form action="/NewFood" method='post'>
-		@csrf
+			@csrf
+			<button type='submit'>+</button>
+		</form>		
 		@else
 		<form action="/" method='get'>
-		@endif
-		<button type='submit'>+</button>
+			<button type='submit'>+</button>
 		</form>
+		@endif
+		<!-- <button type='submit'>+</button>
+		</form> -->
 	</header>
 	<main>
 		<div class="adv"></div> <!-- блок для рекламы -->
@@ -29,10 +33,17 @@
 			<div class="modal13213">
 				<form action="addNewFood" method='post'>
 					@csrf
+					<input type="hidden" value="1">
 					<p>Название: </p>
 					<input type="text" name='name'>
 					<p>Категория: </p>
-					<input type="text" name='category'>
+					<select class="form-select" aria-label="Default select example" name='category'>
+						<option value="наборы">наборы</option>
+						<option value="суши">суши</option>
+						<option value="роллы">роллы</option>
+						<option value="wok">wok</option>
+					</select>
+					<!-- <input type="text" name='category'> -->
 					<p>Состав: </p>
 					@foreach($ingridients as $ingridient)
 					<p>{{$ingridient[0]->name}}</p>
