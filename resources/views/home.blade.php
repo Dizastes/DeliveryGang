@@ -59,76 +59,6 @@
         <div class="adv"> <img src="{{ asset('images/банер 3.png') }}"></img></div>
         <div class="main_block"> <!-- основной блок с товарами -->
 
-            @if ($role == 3 and isset($modal))
-
-                <div class="modal fade" id="fullInfo-window" tabindex="-1" aria-labelledby="exampleModalLabel"
-                    aria-hidden="true">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="exampleModalLabel">Добавление новой позиции</h5>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                    aria-label="Закрыть"></button>
-                            </div>
-                            <div class="modal-body">
-                                <h1>!!!СНАЧАЛА ДОБАВЛЯТЬ ИНГРИДИЕНТЫ!!!</h1>
-                                <form action="addNewFood" method='post' enctype="multipart/form-data">
-                                    @csrf
-                                    <input type="hidden" value="1">
-                                    <p>Название: </p>
-                                    <input type="text" name='name'>
-                                    <p>Категория: </p>
-                                    <select class="form-select" aria-label="Default select example" name='category'>
-                                        <option value="наборы">наборы</option>
-                                        <option value="суши">суши</option>
-                                        <option value="роллы">роллы</option>
-                                        <option value="супы">супы</option>
-                                        <option value="wok">wok</option>
-                                        <option value="салаты">салаты</option>
-                                        <option value="закуски">закуски</option>
-                                        <option value="напитки">напитки</option>
-                                    </select>
-                                    <input type="file" name="image">
-                                    <p>Состав: </p>
-                                    @foreach ($ingridients as $ingridient)
-                                        <p>{{ $ingridient[0]->name }}</p>
-                                    @endforeach
-                                    <p></p>
-                                    <p>Цена: </p>
-                                    <input type="text" name='cost'>
-                                    <button type="submit" class="btn btn-primary"
-                                        style="height: max-content">Добавить</button>
-                                </form>
-                                <form action="addNewIngridient" method='post'>
-                                    @csrf
-                                    <select class="form-select" aria-label="Default select example"
-                                        name='ingridient_id'>
-                                        @foreach ($newIngridients as $ingridient)
-                                            <option value="{{ $ingridient->id }}">{{ $ingridient->name }}</option>
-                                        @endforeach
-                                    </select>
-                                    <button type='submit'>+</button>
-                                </form>
-                                <form action="deleteNewIngridient" method='post'>
-                                    @csrf
-                                    <select class="form-select" aria-label="Default select example"
-                                        name='ingridient_id'>
-                                        @foreach ($ingridients as $ingridient)
-                                            <option value="{{ $ingridient[0]->id }}">{{ $ingridient[0]->name }}
-                                            </option>
-                                        @endforeach
-                                    </select>
-                                    <button type='submit'>-</button>
-                                </form>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"
-                                    style="height: max-content">Закрыть</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            @endif
             @foreach ($foods as $category => $foodItems)
                 <h1>{{ $category }}</h1>
                 <div class="category" id="{{ $category }}">
@@ -248,6 +178,74 @@
                 </div>
             </div>
         @endif
+        @if ($role == 3 and isset($modal))
+
+            <div class="modal fade" id="modal-window" tabindex="-1" aria-labelledby="exampleModalLabel"
+                aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Добавление новой позиции</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                aria-label="Закрыть"></button>
+                        </div>
+                        <div class="modal-body">
+                            <h1>!!!СНАЧАЛА ДОБАВЛЯТЬ ИНГРИДИЕНТЫ!!!</h1>
+                            <form action="addNewFood" method='post' enctype="multipart/form-data">
+                                @csrf
+                                <input type="hidden" value="1">
+                                <p>Название: </p>
+                                <input type="text" name='name'>
+                                <p>Категория: </p>
+                                <select class="form-select" aria-label="Default select example" name='category'>
+                                    <option value="наборы">наборы</option>
+                                    <option value="суши">суши</option>
+                                    <option value="роллы">роллы</option>
+                                    <option value="супы">супы</option>
+                                    <option value="wok">wok</option>
+                                    <option value="салаты">салаты</option>
+                                    <option value="закуски">закуски</option>
+                                    <option value="напитки">напитки</option>
+                                </select>
+                                <input type="file" name="image">
+                                <p>Состав: </p>
+                                @foreach ($ingridients as $ingridient)
+                                    <p>{{ $ingridient[0]->name }}</p>
+                                @endforeach
+                                <p></p>
+                                <p>Цена: </p>
+                                <input type="text" name='cost'>
+                                <button type="submit" class="btn btn-primary"
+                                    style="height: max-content">Добавить</button>
+                            </form>
+                            <form action="addNewIngridient" method='post'>
+                                @csrf
+                                <select class="form-select" aria-label="Default select example" name='ingridient_id'>
+                                    @foreach ($newIngridients as $ingridient)
+                                        <option value="{{ $ingridient->id }}">{{ $ingridient->name }}</option>
+                                    @endforeach
+                                </select>
+                                <button type='submit'>+</button>
+                            </form>
+                            <form action="deleteNewIngridient" method='post'>
+                                @csrf
+                                <select class="form-select" aria-label="Default select example" name='ingridient_id'>
+                                    @foreach ($ingridients as $ingridient)
+                                        <option value="{{ $ingridient[0]->id }}">{{ $ingridient[0]->name }}
+                                        </option>
+                                    @endforeach
+                                </select>
+                                <button type='submit'>-</button>
+                            </form>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"
+                                style="height: max-content">Закрыть</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        @endif
     </main>
     @include('templates.footer')
 
@@ -277,6 +275,9 @@
             keyboard: false
         })
         myModal.show();
+        myModal._element.addEventListener('hide.bs.modal', function(event) {
+            window.location.href = '/';
+        });
     @endif
 
     @if (isset($del['name']))
@@ -285,6 +286,9 @@
             keyboard: false
         })
         myModal.show();
+        myModal._element.addEventListener('hide.bs.modal', function(event) {
+            window.location.href = '/';
+        });
     @endif
 
     @if (isset($fullInfo[0]->name))
