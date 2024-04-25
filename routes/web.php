@@ -21,6 +21,14 @@ use App\Http\Controllers\cartController;
 
 Route::get('/', [HomeController::class, "getData"])->name('home');
 
+Route::post('/addIngridient', [HomeController::class, "addIngridient"]);
+Route::post('/addNewIngridient', [HomeController::class, "addIngridientNewFood"]);
+Route::post('/deleteIngridient', [HomeController::class, "deleteIngridient"]);
+Route::post('/deleteNewIngridient', [HomeController::class, "deleteIngridientNewFood"]);
+Route::post('/addNewFood', [HomeController::class, "AddNewFood"]);
+
+Route::post('/NewFood', [HomeController::class, "getModalForAddNewFood"]);
+
 Route::get('/orders', [StatusController::class, "getOdersData"]);
 Route::post('/orders/change', [StatusController::class, "changeStatus"])->name('orders.change');
 Route::post('orders/next', [StatusController::class, "setNextStatus"])->name('orders.next');

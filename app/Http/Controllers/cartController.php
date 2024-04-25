@@ -57,7 +57,7 @@ class cartController extends Controller
         $totalCost = 0;
         $foods = [];
         foreach ($cart as $food) {
-            $f = DB::table('food')->where('id', $food['id'])->get();
+            $f = DB::table('food')->where('id', $food['id'])->get();    
             $foodTemp['id'] = $f[0]->id;
             $foodTemp['quantity'] = $food['quantity'];
             $foodTemp['cost'] = $f[0]->cost;
