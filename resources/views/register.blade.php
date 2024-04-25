@@ -27,37 +27,37 @@
                 <label class="row">логин</label>
                 <input class="row" type="text" name="login" placeholder="">
                 @error('login')
-                    {{$message}}
+                    {{ $message }}
                 @enderror
                 <label class="row">имя</label>
                 <input class="row" type="text" name="name" placeholder="">
                 @error('name')
-                    {{$message}}
+                    {{ $message }}
                 @enderror
                 <label class="row">e-mail</label>
                 <input class="row" type="text" name="email" placeholder="">
                 @error('email')
-                    {{$message}}
+                    {{ $message }}
                 @enderror
                 <label class="row">телефон</label>
                 <input class="row" type="text" name="number" placeholder="">
                 @error('number')
-                    {{$message}}
+                    {{ $message }}
                 @enderror
                 <label class="row">дата рождения</label>
                 <input class="row form-control" type="date" name="date" placeholder="">
                 @error('date')
-                    {{$message}}
+                    {{ $message }}
                 @enderror
                 <label class="row">пароль</label>
-                <input class="row" type="text" name="password" placeholder="">
+                <input class="row" type="password" name="password" placeholder="">
                 @error('password')
-                    {{$message}}
+                    {{ $message }}
                 @enderror
                 <label class="row">подтвердите пароль</label>
-                <input class="row" type="text" name="c_password" placeholder="">
+                <input class="row" type="password" name="c_password" placeholder="">
                 @error('c_password')
-                    {{$message}}
+                    {{ $message }}
                 @enderror
                 <input class="row" type="submit" value="регистрация">
             </div>

@@ -24,6 +24,9 @@
                         </div>
                     </div>
                 </div>
+                <div class="row order-info-details">
+                    <p>Комментарий: {{ $order['comment'] }}</p>
+                </div>
                 <div class="row">
                     <button class="btn" type="button" data-bs-toggle="collapse"
                         data-bs-target="#{{ $order['id'] }}" aria-expanded="false" aria-controls="collapseExample">

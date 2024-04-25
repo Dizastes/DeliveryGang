@@ -127,7 +127,7 @@ class cartController extends Controller
         $order->address = 'ул.' . $street . ', д. ' . $houseNum .  ', под. ' . $entrance . ', кв. ' . $apartment;
         $order->time = $request->input('time');
         $order->cost = $request->input('cost');
-        // Нужно добавить время для заказа
+        $order->comment = $request->input('comment');
         $order->save();
 
         $cart = Session::get('cart', []);

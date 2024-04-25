@@ -26,7 +26,7 @@
             </div>
             <div class="container d-flex flex-row icons-group">
                 @if (isset($role))
-                    <input type=text class="search-input" placeholder="поиск">
+                    <input type=text class="search-input" id="searchInput" placeholder="поиск">
                     @if ($role == '3')
                         <div>
                             <form action="/NewFood" method='post'>
@@ -250,25 +250,26 @@
         @endif
     </main>
     @include('templates.footer')
-    <input type="text" id="searchInput">
-    <button onclick="search()">Поиск</button>
 
-    <script>
-        function search() {
-            var searchTerm = document.getElementById('searchInput').value;
-            window.location.hash = searchTerm;
-        }
-        document.getElementById('searchInput').addEventListener('keyup', function(event) {
-            if (event.key === 'Enter') {
-                search();
-            }
-        });
-    </script>
 </body>
 
 <script>
     let a = document.querySelector('.modal_form')
 
+    function search() {
+        var searchTerm = document.getElementById('searchInput').value;
+        searchTerm = document.getElementById(searchTerm);
+
+        searchTerm.scrollIntoView({
+            behavior: 'smooth',
+            block: 'center'
+        });
+    }
+    document.getElementById('searchInput').addEventListener('keyup', function(event) {
+        if (event.key === 'Enter') {
+            search();
+        }
+    });
 
     @if (isset($modal))
         console.log(1)
