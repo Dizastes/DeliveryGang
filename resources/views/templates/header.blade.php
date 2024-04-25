@@ -39,7 +39,7 @@
         <div class="button_area">
             <div class="profile_button">
                 <a href="/lk">
-                    <img src="{{ asset('images/human.png') }}" class="profile_img">
+                    <img src="{{ asset('images/icon.png') }}" class="profile_img">
                 </a>
             </div>
         </div>
