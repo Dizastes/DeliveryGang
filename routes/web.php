@@ -64,4 +64,8 @@ Route::get('logout', [LoginController::class, "logout"]);
 
 Route::post('/cart/addorder', [cartController::class, 'addOrder']);
 
+Route::get('/role', [HomeController::class, "returnRoleManager"]);
+
+Route::post('role/changeRole', [HomeController::class, "changeRole"]);
+
 // Route::get('')

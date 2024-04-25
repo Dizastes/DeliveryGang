@@ -7,6 +7,8 @@ use App\Models\Food;
 use App\Models\Ingridient;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
+use App\Models\User;
+use Illuminate\Http\Response;
 
 class HomeController extends Controller
 {
@@ -240,5 +242,25 @@ class HomeController extends Controller
 
         return view('home', ['foods' => $foods, 'role' => $role]);
     }
+
+    public function returnRoleManager(Request $request) {
+        $role = $this->getRole($request);
+
+        if ($role != 3) {
+            return response()->json(['status' => Response::HTTP_FORBIDDEN]);
+        }
+        else {
+            $users = User::all();
+        }
+        return view('role', ['role' => $role, 'users' => $users]);
+    }
     
+    public function changeRole(Request $request) {
+        $user_id = $request->only('id')['id'];
+        $new_role = $request->only('new_role')['new_role'];
+        
+        $role = User::updateOrCreate(['id' => $user_id], ['privilege' => $new_role]);
+
+        return redirect('role');
+    }
 }
