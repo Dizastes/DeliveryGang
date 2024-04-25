@@ -7,6 +7,8 @@ use App\Models\Orders;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\DB;
+use App\Events\OrderAccepted;
+
 
 class cartController extends Controller
 {
@@ -121,6 +123,7 @@ class cartController extends Controller
         $apartment = $request->input('apartment');
 
         $order->address = 'ул.' . $street . ', д. ' . $houseNum .  ', под. ' . $entrance . ', кв. ' . $apartment;
+        $order->time = $request->input('time');
         $order->cost = $request->input('cost');
         // Нужно добавить время для заказа
         $order->save();
@@ -141,7 +144,8 @@ class cartController extends Controller
         }
 
         Session::forget('cart');
-
+        
+        event(new OrderAccepted($order));
         return redirect()->route('home');
     }
 }

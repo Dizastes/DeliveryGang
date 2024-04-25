@@ -19,6 +19,8 @@ class RegisterController extends Controller
             'email' => $userData->email,
             'password' => bcrypt($userData->password),
             'login' => $userData->login,
+            'number' => $userData->number,
+            'birth'=> $userData->date,
         ]);
 
         return response()->json($user, Response::HTTP_CREATED);

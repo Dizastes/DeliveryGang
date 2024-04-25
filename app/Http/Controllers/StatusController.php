@@ -7,11 +7,16 @@ use App\Models\Orders;
 use App\Models\CourierOrders;
 use Illuminate\Http\Response;
 use App\Events\OrderAccepted;
+use App\Models\Food;
+use Illuminate\Support\Facades\DB;
+use App\Models\User;
+
 class StatusController extends Controller
 {
     public function getOdersData(Request $request)
     {
-        $orders = null;
+        $orders = [];
+		$orderDB = [];
         $form_name = '';
         $token = explode(".", $request->cookie('Auth'));
     	$data = json_decode(base64_decode($token[1]), true);
@@ -25,21 +30,45 @@ class StatusController extends Controller
             		$id_array[] = $row['order_id'];
             	}
 
-                $orders = Orders::whereIn('status',['ждет курьера'])->OrwhereIn('id', $id_array)->get();
+                $orderDB = Orders::whereIn('status',['ждет курьера'])->OrwhereIn('id', $id_array)->get();
                 $form_name = 'other';
                 break;
             case 2:
-                $orders = Orders::whereIn('status',['готовится', 'в очереди'])->get();
+                $orderDB = Orders::whereIn('status',['готовится', 'в очереди'])->get();
                 $form_name = 'other';
                 break;
             case 3:
-                $orders = Orders::all();
+				$orderDB = Orders::all();
                 $form_name = 'manager';
                 break;
             default:
                 return response()->json(['status' => Response::HTTP_FORBIDDEN]);
         }
-        return view('orders', ['items' => $orders, 'form_name' => $form_name,]);
+		foreach ($orderDB as $temp) {
+			$orderTemp['id'] = $temp->id;
+			$orderTemp['date'] = $temp->created_at;
+			$orderTemp['foods'] = [];
+			$food_list = DB::table('order_list')->select('food_id')->where('order_id', $temp->id)->get();
+			$count = [];
+			foreach ($food_list as $food) {
+				if (isset($count[$food->food_id]))
+					$count[$food->food_id] += 1;
+				else
+					$count[$food->food_id] = 1;
+			}
+			foreach ($count as $key => $cnt) {
+				$sostav = Food::select('name')->where('id', $key)->value('name');
+				$orderTemp['foods'][$key] = $sostav . ' x' . $cnt;
+			}
+			$orderTemp['cost'] = $temp->cost;
+			$orderTemp['address'] = $temp->address;
+			$orderTemp['time'] = $temp->time;
+			$orderTemp['number'] = User::select('number')->where('id', $temp->user_id)->value('number');
+			$orderTemp['status'] = $temp->status;
+			array_push($orders, $orderTemp);
+		}
+		$orders = array_reverse($orders);
+        return view('orders', ['items' => $orders, 'form_name' => $form_name, 'role' => $data['role']]);
     }
 
     public function changeStatus(Request $request) {

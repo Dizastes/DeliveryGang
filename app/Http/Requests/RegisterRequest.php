@@ -27,6 +27,8 @@ class RegisterRequest extends FormRequest
             'login' => 'required|string|unique:users',
             'email' => 'required|string|email|unique:users',
             'password' => 'required|string|min:8',
+            'number' => 'required|string|min:11|unique:users',
+            'date' => 'required|date',
             'c_password' => 'required|string|min:8|same:password',
         ];
     }
@@ -36,7 +38,9 @@ class RegisterRequest extends FormRequest
             $this->input('name'),
             $this->input('email'),
             $this->input('password'),
-            $this->input('login')
+            $this->input('login'),
+            $this->input('number'),
+            $this->input('date')
         );
     }
 }

@@ -3,6 +3,10 @@
     src: url("fonts/KyivTypeSans-VarGX.ttf");
 }
 
+:root {
+    --worker-color: white;
+}
+
 body {
     font-family: KyivType Sans !important;
 }
@@ -84,7 +88,8 @@ main {
     text-align: left;
 }
 
-.register-form input[type="text"] {
+.register-form input[type="text"],
+.register-form input[type="date"] {
     font-size: 24px;
     width: 31vw;
     min-width: 360px;
@@ -275,6 +280,7 @@ main {
 }
 
 .header_area {
+    margin-top: 2% !important;
     width: 100%;
     display: flex;
     flex-direction: column;
@@ -311,7 +317,7 @@ main {
 
 .titile h3 {
     margin: 0;
-    color: green;
+    color: var(--worker-color);
 }
 
 .subtitle p {
@@ -327,7 +333,7 @@ main {
 .profile_img {
     width: 80px;
     height: 80px;
-    background-color: green;
+    background-color: var(--worker-color);
     border-radius: 100%;
 }
 
@@ -368,6 +374,50 @@ main {
 }
 
 .order_line {
-    border: 7px solid green;
+    border: 7px solid var(--worker-color);
     width: 100%;
+}
+
+.decor-elem {
+    width: 2vw;
+    border-radius: 60px;
+    background: var(--worker-color);
+}
+
+.order-info-details {
+    display: flex;
+    flex-direction: row;
+}
+
+.order-workers {
+    width: 100%;
+    justify-content: space-between;
+    margin: 1%;
+}
+
+.order-workers .row {
+    padding-top: 2%;
+}
+
+.btn {
+    height: 100px;
+}
+.order-workers .order-status {
+    margin-top: 50px !important;
+    background-color: var(--worker-color);
+}
+
+.order-info-details {
+    flex-direction: column;
+    width: 500px;
+}
+
+.order-info-details .order-details {
+    width: 100%;
+    margin: 0;
+}
+
+.orders-form {
+    display: flex;
+    flex-direction: column;
 }
