@@ -227,9 +227,6 @@ class HomeController extends Controller
 
     public function AddNewFood(AddFoodRequest $request)
     {
-        $foods = $this->getFoods();
-        $role = $this->getRole($request);
-
         $name = $request->input('name');
         $cost = $request->input('cost');
         $category = $request->input('category');
@@ -253,7 +250,6 @@ class HomeController extends Controller
             DB::table('food_ingridient')->insert(['food_id' => $food->id, 'ingridient_id' => $ingridient[0]->id]);
         }
 
-        // return view('home', ['foods' => $foods, 'role' => $role]);
         return redirect()->route('home');
     }
 
@@ -324,15 +320,6 @@ class HomeController extends Controller
         }
         Food::where('id', $id)->delete();
 
-
-
-        $foods = $this->getFoods();
-        $role = $this->getRole($request);
-        $temp = $this->getModal($request);
-        $del = $temp[0];
-        $ingridientsIn = $temp[1];
-        $ingridients = $temp[2];
-
-        return view('home', ['foods' => $foods, 'role' => $role, 'del' => $del, 'ingridientsIn' => $ingridientsIn, 'ingridients' => $ingridients]);
+        return redirect()->route('home');
     }
 }

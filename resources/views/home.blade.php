@@ -151,45 +151,61 @@
             @endforeach
         </div>
         @if ($role == 3 and isset($del['name']))
-            <div class='modal3123123'>
-                <form class='modal_form' action="/changeName" method="post">
-                    @csrf
-                    <input type="hidden" name='id' value="{{ $del['id'] }}">
-                    <input type="text" name='name' value={{ $del['name'] }}>
-                    <button type='submit'>O</button>
-                </form>
-                <form class='modal_form' action="/changeCost" method="post">
-                    @csrf
-                    <input type="hidden" name='id' value="{{ $del['id'] }}">
-                    <input type="text" name='cost' value={{ $del['cost'] }}>
-                    <button type='submit'>O</button>
-                </form>
-                <p>Состав:</p>
-                <p>{{ $del['ingridients'] }}</p>
-                <form action="addIngridient" method='post'>
-                    @csrf
-                    <input type="hidden" name='id' value="{{ $del['id'] }}">
-                    <select class="form-select" aria-label="Default select example" name='ingridient_id'>
-                        @foreach ($ingridients as $ingridient)
-                            <option value="{{ $ingridient->id }}">{{ $ingridient->name }}</option>
-                        @endforeach
-                    </select>
-                    <button type='submit'>+</button>
-                </form>
-                <form action="deleteIngridient" method='post'>
-                    @csrf
-                    <input type="hidden" name='id' value="{{ $del['id'] }}">
-                    <select class="form-select" aria-label="Default select example" name='ingridient_id'>
-                        @foreach ($ingridientsIn as $ingridient)
-                            <option value="{{ $ingridient['id'] }}">{{ $ingridient['name'] }}</option>
-                        @endforeach
-                    </select>
-                    <button type='submit'>-</button>
-                </form>
-                <form action="/deleteFood">
-                    <input type="hidden" name='id' value="{{ $del['id'] }}">
-                    <button type='submit'>Удалить</button>
-                </form>
+            <div class="modal fade" id="change-window" tabindex="-1" aria-labelledby="exampleModalLabel"
+                aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Добавление новой позиции</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                aria-label="Закрыть"></button>
+                        </div>
+                        <div class="modal-body">
+                            <h1>!!!СНАЧАЛА ДОБАВЛЯТЬ ИНГРИДИЕНТЫ!!!</h1>
+                            <form class='modal_form' action="/changeName" method="post">
+                                @csrf
+                                <input type="hidden" name='id' value="{{ $del['id'] }}">
+                                <input type="text" name='name' value={{ $del['name'] }}>
+                                <button type='submit'>Поменять название</button>
+                            </form>
+                            <form class='modal_form' action="/changeCost" method="post">
+                                @csrf
+                                <input type="hidden" name='id' value="{{ $del['id'] }}">
+                                <input type="text" name='cost' value={{ $del['cost'] }}>
+                                <button type='submit'>Поменять цену</button>
+                            </form>
+                            <p>Состав:</p>
+                            <p>{{ $del['ingridients'] }}</p>
+                            <form action="addIngridient" method='post'>
+                                @csrf
+                                <input type="hidden" name='id' value="{{ $del['id'] }}">
+                                <select class="form-select" aria-label="Default select example" name='ingridient_id'>
+                                    @foreach ($ingridients as $ingridient)
+                                        <option value="{{ $ingridient->id }}">{{ $ingridient->name }}</option>
+                                    @endforeach
+                                </select>
+                                <button type='submit'>+</button>
+                            </form>
+                            <form action="deleteIngridient" method='post'>
+                                @csrf
+                                <input type="hidden" name='id' value="{{ $del['id'] }}">
+                                <select class="form-select" aria-label="Default select example" name='ingridient_id'>
+                                    @foreach ($ingridientsIn as $ingridient)
+                                        <option value="{{ $ingridient['id'] }}">{{ $ingridient['name'] }}</option>
+                                    @endforeach
+                                </select>
+                                <button type='submit'>-</button>
+                            </form>
+                            <form action="/deleteFood">
+                                <input type="hidden" name='id' value="{{ $del['id'] }}">
+                                <button type='submit'>Удалить</button>
+                            </form>
+                        </div>
+                        <div class="modal-footer">
+                            <a href="/" class="btn btn-secondary" style="height: max-content">Закрыть</a>
+                        </div>
+                    </div>
+                </div>
             </div>
         @endif
     </main>
@@ -199,13 +215,22 @@
 <script>
     let a = document.querySelector('.modal_form')
 
-    var myModal = new bootstrap.Modal(document.getElementById('modal-window'), {
-        keyboard: false
-    })
 
     @if (isset($modal))
+        var myModal = new bootstrap.Modal(document.getElementById('modal-window'), {
+            keyboard: false
+        })
         myModal.show();
     @endif
+
+    @if (isset($del['name']))
+        var myModal = new bootstrap.Modal(document.getElementById('change-window'), {
+            keyboard: false
+        })
+        myModal.show();
+    @endif
+
+
 
     window.addEventListener('scroll', function() {
         var navigationMenu = document.querySelector('.navigation-menu');
