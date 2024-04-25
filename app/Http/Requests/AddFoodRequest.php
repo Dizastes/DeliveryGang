@@ -24,6 +24,8 @@ class AddFoodRequest extends FormRequest
         return [
             'name' => 'required|string',
             'cost' => 'required|int',
+            'image' => 'required|file'
+            // 'image.*' => 'mimes:png,jpg,jpeg,bmp|max:20000'
         ];
     }
 }

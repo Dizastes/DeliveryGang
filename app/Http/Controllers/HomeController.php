@@ -322,4 +322,24 @@ class HomeController extends Controller
 
         return redirect()->route('home');
     }
+
+    public function showFullInfo(Request $request) {
+        $id = $request->id;
+        $food = Food::where('id', $id)->get();
+
+        $temp = '';
+        $foodIngridients = DB::table('food_ingridient')->select('ingridient_id')->where('food_id', $id)->get();
+        foreach ($foodIngridients as $ingridient) {
+            if ($temp != '')
+                $temp .= ', ' . DB::table('ingridient')->select('name')->where('id', $ingridient->ingridient_id)->value('name');
+            else
+                $temp .= DB::table('ingridient')->select('name')->where('id', $ingridient->ingridient_id)->value('name');
+        }
+        $food[0]->ingridients = $temp;
+
+        $foods = $this->getFoods();
+        $role = $this->getRole($request);
+
+        return view('home', ['foods' => $foods, 'role' => $role, 'fullInfo' => $food]);
+    }
 }

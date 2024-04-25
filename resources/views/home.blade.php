@@ -48,6 +48,13 @@
                 @endforeach
             </div>
         </nav>
+        @if(isset($fullInfo))
+        	<p>{{$fullInfo[0]->name}}</p>
+        	<img src="{{$fullInfo[0]->photo}}" alt="">
+        	<p>{{$fullInfo[0]->ingridients}}</p>
+        	<p>{{$fullInfo[0]->cost .' ₽'}}</p>
+        	<p></p>
+        @endif
         <div class="adv"> <img src="{{ asset('images/банер 3.png') }}"></img></div>
         <div class="main_block"> <!-- основной блок с товарами -->
 
@@ -135,7 +142,7 @@
                                 @csrf
                             @endif
                             <input type="hidden" name='id' value="{{ $food->id }}">
-                            <img class="main-img" src="{{ asset($food->photo) }}">
+                            <a href="/showInfo?id={{$food->id}}"><img class="main-img" src="{{ asset($food->photo) }}"></a>
                             <h1>{{ $food->name }}</h1>
                             <h3>{{ $food->ingridients }}</h3>
                             <div class="coster">
