@@ -7,7 +7,7 @@
         </div>
     </div>
     <div class="container d-flex flex-row icons-group">
-        <a href="#"><img class="row" src="{{ asset('images/shoper.png') }}"></a>
-        <a href="#"><img class="row user-icon" src="{{ asset('images/icon.png') }}"></a>
+        <a href="/cart"><img class="row" src="{{ asset('images/shoper.png') }}"></a>
+        <a href="/lk"><img class="row user-icon" src="{{ asset('images/icon.png') }}"></a>
     </div>
 </header>

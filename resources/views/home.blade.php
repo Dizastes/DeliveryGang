@@ -63,7 +63,11 @@
 				<h1>{{ $category }}</h1>
 				@foreach ($foodItems as $food)
 				<div class="item">
-					<form action="@if ($role == 3) {{ '/' }} @else {{ '/cart/add' }} @endif" method="@if ($role==3) {{'get'}} @else {{'post'}} @endif">
+					@if ($role == 3)
+						<form action="/" method="get">
+					@else
+						<form action="/cart/add" method="post">
+					@endif
 						@if (!$role==3)
 						@csrf
 						@endif
