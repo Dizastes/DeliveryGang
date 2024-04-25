@@ -51,111 +51,113 @@
                     </div>
                 @endforeach
             </div>
-            <div class="container d-flex flex-row align-items-center">
-                <h1>Дополнительно</h1>
-                <div class="line_block">
-                    <div class="order_line"></div>
-                </div>
-            </div>
-            <div class="extra">
-                <div class="item additionally">
-                    <h5>Палочки для суши</h5>
-                    <img src="{{ asset('images/палочки для суши.png') }}">
-                    <div class="add-to-remove">
-                        <form action="cart/remove" method="post">
-                            @csrf
-                            <input type="hidden" value=42 name='id'>
-                            <button class='minus' type='submit'>-</button>
-                        </form>
-                        <p>@php
-                            if (isset($cart[42])) {
-                                echo $cart[42]['quantity'];
-                            } else {
-                                echo '0';
-                            }
-                        @endphp </p>
-                        <form action="cart/addInto" method='post'>
-                            @csrf
-                            <input type="hidden" value=42 name='id'>
-                            <button class='plus' type='submit'>+</button>
-                        </form>
+            @foreach ($foods as $food)
+                @if (!in_array($food['id'], [42, 43, 44, 45]))
+                    <div class="container d-flex flex-row align-items-center">
+                        <h1>Дополнительно</h1>
+                        <div class="line_block">
+                            <div class="order_line"></div>
+                        </div>
                     </div>
-                </div>
-                <div class="item additionally"><!-- картинка -->
-                    <h5>Соевый соус</h5>
-                    <img src="{{ asset('images/соевый соус.png') }}">
-                    <div class="add-to-remove">
-                        <form action="cart/remove" method="post">
-                            @csrf
-                            <input type="hidden" value=43 name='id'>
-                            <button class='minus' type='submit'>-</button>
-                        </form>
-                        <p>@php
-                            if (isset($cart[43])) {
-                                echo $cart[43]['quantity'];
-                            } else {
-                                echo '0';
-                            }
-                        @endphp </p>
-                        <form action="cart/addInto" method='post'>
-                            @csrf
-                            <input type="hidden" value=43 name='id'>
-                            <button class='plus' type='submit'>+</button>
-                        </form>
+                    <div class="extra">
+                        <div class="item additionally">
+                            <h5>Палочки для суши</h5>
+                            <img src="{{ asset('images/палочки для суши.png') }}">
+                            <div class="add-to-remove">
+                                <form action="cart/remove" method="post">
+                                    @csrf
+                                    <input type="hidden" value=42 name='id'>
+                                    <button class='minus' type='submit'>-</button>
+                                </form>
+                                <p>@php
+                                    if (isset($cart[42])) {
+                                        echo $cart[42]['quantity'];
+                                    } else {
+                                        echo '0';
+                                    }
+                                @endphp </p>
+                                <form action="cart/addInto" method='post'>
+                                    @csrf
+                                    <input type="hidden" value=42 name='id'>
+                                    <button class='plus' type='submit'>+</button>
+                                </form>
+                            </div>
+                        </div>
+                        <div class="item additionally"><!-- картинка -->
+                            <h5>Соевый соус</h5>
+                            <img src="{{ asset('images/соевый соус.png') }}">
+                            <div class="add-to-remove">
+                                <form action="cart/remove" method="post">
+                                    @csrf
+                                    <input type="hidden" value=43 name='id'>
+                                    <button class='minus' type='submit'>-</button>
+                                </form>
+                                <p>@php
+                                    if (isset($cart[43])) {
+                                        echo $cart[43]['quantity'];
+                                    } else {
+                                        echo '0';
+                                    }
+                                @endphp </p>
+                                <form action="cart/addInto" method='post'>
+                                    @csrf
+                                    <input type="hidden" value=43 name='id'>
+                                    <button class='plus' type='submit'>+</button>
+                                </form>
+                            </div>
+                        </div>
+                        <div class="item additionally"><!-- картинка -->
+                            <h5>Имбирь</h5>
+                            <img src="{{ asset('images/имбирь.png') }}">
+                            <div class="add-to-remove">
+                                <form action="cart/remove" method="post">
+                                    @csrf
+                                    <input type="hidden" value=44 name='id'>
+                                    <button class='minus' type='submit'>-</button>
+                                </form>
+                                <p>@php
+                                    if (isset($cart[44])) {
+                                        echo $cart[44]['quantity'];
+                                    } else {
+                                        echo '0';
+                                    }
+                                @endphp </p>
+                                <form action="cart/addInto" method='post'>
+                                    @csrf
+                                    <input type="hidden" value=44 name='id'>
+                                    <button class='plus' type='submit'>+</button>
+                                </form>
+                            </div>
+                        </div>
+                        <div class="item additionally">
+                            <h5>Васаби</h5>
+                            <img src="{{ asset('images/васаби.png') }}">
+                            <div class="add-to-remove">
+                                <form action="cart/remove" method="post">
+                                    @csrf
+                                    <input type="hidden" value=45 name='id'>
+                                    <button class='minus' type='submit'>-</button>
+                                </form>
+                                <p>@php
+                                    if (isset($cart[45])) {
+                                        echo $cart[45]['quantity'];
+                                    } else {
+                                        echo '0';
+                                    }
+                                @endphp </p>
+                                <form action="cart/addInto" method='post'>
+                                    @csrf
+                                    <input type="hidden" value=45 name='id'>
+                                    <button class='plus' type='submit'>+</button>
+                                </form>
+                            </div>
+                        </div>
                     </div>
-                </div>
-                <div class="item additionally"><!-- картинка -->
-                    <h5>Имбирь</h5>
-                    <img src="{{ asset('images/имбирь.png') }}">
-                    <div class="add-to-remove">
-                        <form action="cart/remove" method="post">
-                            @csrf
-                            <input type="hidden" value=44 name='id'>
-                            <button class='minus' type='submit'>-</button>
-                        </form>
-                        <p>@php
-                            if (isset($cart[44])) {
-                                echo $cart[44]['quantity'];
-                            } else {
-                                echo '0';
-                            }
-                        @endphp </p>
-                        <form action="cart/addInto" method='post'>
-                            @csrf
-                            <input type="hidden" value=44 name='id'>
-                            <button class='plus' type='submit'>+</button>
-                        </form>
-                    </div>
-                </div>
-                <div class="item additionally">
-                    <h5>Васаби</h5>
-                    <img src="{{ asset('images/васаби.png') }}">
-                    <div class="add-to-remove">
-                        <form action="cart/remove" method="post">
-                            @csrf
-                            <input type="hidden" value=45 name='id'>
-                            <button class='minus' type='submit'>-</button>
-                        </form>
-                        <p>@php
-                            if (isset($cart[45])) {
-                                echo $cart[45]['quantity'];
-                            } else {
-                                echo '0';
-                            }
-                        @endphp </p>
-                        <form action="cart/addInto" method='post'>
-                            @csrf
-                            <input type="hidden" value=45 name='id'>
-                            <button class='plus' type='submit'>+</button>
-                        </form>
-                    </div>
-                </div>
-            </div>
-            <p class="total-summ">{{ 'Сумма заказа: ' . $totalCost . ' ₽' }}</p>
+                    <p class="total-summ">{{ 'Сумма заказа: ' . $totalCost . ' ₽' }}</p>
         </div>
         <div class="form">
             <div class="container d-flex flex-row align-items-center">
-                <h1>Адресс:</h1>
+                <h1>Адрес:</h1>
                 <div class="line_block">
                     <div class="order_line"></div>
                 </div>
@@ -193,8 +195,12 @@
                 </div>
             </form>
         </div>
-    </main>
-    @include('templates.footer')
+    @break
+    @endif
+    @endforeach
+
+</main>
+@include('templates.footer')
 </body>
 
 </html>
