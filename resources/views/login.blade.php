@@ -20,7 +20,13 @@
 			@csrf
 			<div class="container">
 			<input class="row" type="text" name="login" placeholder="логин">
+			@error('login')
+				{{$message}}
+			@enderror
 			<input class="row" type="text" style="margin-top: 10px;" name="password" placeholder="пароль">
+			@error('password')
+				{{$message}}
+			@enderror
 			<input class="row" type="submit">
 			</div>
 			<div class="container text-center mt-3">

@@ -21,6 +21,8 @@ use App\Http\Controllers\cartController;
 
 Route::get('/', [HomeController::class, "getData"])->name('home');
 
+Route::get('/showInfo', [HomeController::class, "showFullInfo"]);
+
 Route::middleware(['login'])->group(function () {
 
 	Route::get('register', function () {
@@ -32,6 +34,8 @@ Route::middleware(['login'])->group(function () {
 	    return view('login');
 	})->name('login');
 	Route::post('login', [LoginController::class, "login"]);
+
+	Route::get('logout', [LoginController::class, "logout"]);
 });
 
 Route::middleware(['jwt'])->group(function () {
@@ -64,7 +68,6 @@ Route::middleware(['jwt'])->group(function () {
 	Route::post('/cart/addorder', [cartController::class, 'addOrder']);
 
 	Route::get('/lk', [lkController::class, 'getInfo'])->name('lk');
-	Route::get('logout', [LoginController::class, "logout"]);
 
 	Route::get('/role', [HomeController::class, "returnRoleManager"]);
 	Route::post('role/changeRole', [HomeController::class, "changeRole"]);
