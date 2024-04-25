@@ -52,8 +52,8 @@ class HomeController extends Controller
     public function getRole(Request $request)
     {
         $token = explode(".", $request->cookie('Auth'));
-        if (count($token)!=3) {
-            return 0;
+        if (count($token) != 3) {
+            return null;
         }
         $data = json_decode(base64_decode($token[1]), true);
         $role = $data['role'];
@@ -71,25 +71,28 @@ class HomeController extends Controller
             $id = $request->input('id');
             $foodTemp = Food::where('id', $id)->get();
             $del['id'] = $id;
-            $del['name'] = $foodTemp[0]->name;
-            $del['cost'] = $foodTemp[0]->cost;
-            $foodIngridients = DB::table('food_ingridient')->select('ingridient_id')->where('food_id', $id)->get();
+            if (isset($foodTemp[0])) {
+                $del['name'] = $foodTemp[0]->name;
+                $del['cost'] = $foodTemp[0]->cost;
+                $foodIngridients = DB::table('food_ingridient')->select('ingridient_id')->where('food_id', $id)->get();
 
-            foreach ($foodIngridients as $ingridient) {
-                $t = DB::table('ingridient')->select('name')->where('id', $ingridient->ingridient_id)->value('name');
-                array_push($ingridientsIn, ['id' => $ingridient->ingridient_id, 'name' => $t]);
-                if ($del['ingridients'] != '') {
-                    $del['ingridients'] .= ', ' . $t;
-                } else
-                    $del['ingridients'] .= $t;
+                foreach ($foodIngridients as $ingridient) {
+                    $t = DB::table('ingridient')->select('name')->where('id', $ingridient->ingridient_id)->value('name');
+                    array_push($ingridientsIn, ['id' => $ingridient->ingridient_id, 'name' => $t]);
+                    if ($del['ingridients'] != '') {
+                        $del['ingridients'] .= ', ' . $t;
+                    } else
+                        $del['ingridients'] .= $t;
+                }
+            }
+            $ing = explode(", ", $del['ingridients']);
+            foreach ($ingridientsTemp as $tmp) {
+                if (!in_array($tmp->name, $ing)) {
+                    array_push($ingridients, $tmp);
+                }
             }
         }
-        $ing = explode(", ", $del['ingridients']);
-        foreach ($ingridientsTemp as $tmp) {
-            if (!in_array($tmp->name, $ing)) {
-                array_push($ingridients, $tmp);
-            }
-        }
+
 
         return [$del, $ingridientsIn, $ingridients];
     }
@@ -98,7 +101,6 @@ class HomeController extends Controller
     {
         $foods = $this->getFoods();
         $role = $this->getRole($request);
-
         $temp = $this->getModal($request);
         $del = $temp[0];
         $ingridientsIn = $temp[1];
@@ -240,41 +242,48 @@ class HomeController extends Controller
         $food->cost = $cost;
         $food->category = $category;
 
+        $image = $request->file('image');
+        $imageName = time() . '.' . $image->getClientOriginalExtension();
+        $image->move(public_path('images'), $imageName);
+        $food->photo = 'images/' . $imageName;
+
         $food->save();
 
         foreach ($ingridients as $ingridient) {
             DB::table('food_ingridient')->insert(['food_id' => $food->id, 'ingridient_id' => $ingridient[0]->id]);
         }
 
-        return view('home', ['foods' => $foods, 'role' => $role]);
+        // return view('home', ['foods' => $foods, 'role' => $role]);
+        return redirect()->route('home');
     }
-    
-    public function returnRoleManager(Request $request) {
+
+    public function returnRoleManager(Request $request)
+    {
         $role = $this->getRole($request);
 
         if ($role != 3) {
             return response()->json(['status' => Response::HTTP_FORBIDDEN]);
-        }
-        else {
+        } else {
             $users = User::all();
         }
         return view('role', ['role' => $role, 'users' => $users]);
     }
-    
-    public function changeRole(Request $request) {
+
+    public function changeRole(Request $request)
+    {
         $user_id = $request->only('id')['id'];
         $new_role = $request->only('new_role')['new_role'];
-        
+
         $role = User::updateOrCreate(['id' => $user_id], ['privilege' => $new_role]);
 
         return redirect('role');
     }
 
-    public function changeName(ChangeNameRequest $request) 
+    public function changeName(ChangeNameRequest $request)
     {
         $id = $request->input('id');
         $name = $request->input('name');
-        Food::updateOrCreate(['id' => $id],['name' => $name]);
+        Food::updateOrCreate(['id' => $id], ['name' => $name]);
 
         $foods = $this->getFoods();
         $role = $this->getRole($request);
@@ -287,15 +296,38 @@ class HomeController extends Controller
         return view('home', ['foods' => $foods, 'role' => $role, 'del' => $del, 'ingridientsIn' => $ingridientsIn, 'ingridients' => $ingridients]);
     }
 
-    public function changeCost(ChangeCostRequest $request) 
+    public function changeCost(ChangeCostRequest $request)
     {
         $id = $request->input('id');
         $cost = $request->input('cost');
-        Food::updateOrCreate(['id' => $id],['cost' => $cost]);
+        Food::updateOrCreate(['id' => $id], ['cost' => $cost]);
 
         $foods = $this->getFoods();
         $role = $this->getRole($request);
 
+        $temp = $this->getModal($request);
+        $del = $temp[0];
+        $ingridientsIn = $temp[1];
+        $ingridients = $temp[2];
+
+        return view('home', ['foods' => $foods, 'role' => $role, 'del' => $del, 'ingridientsIn' => $ingridientsIn, 'ingridients' => $ingridients]);
+    }
+
+    public function deleteFood(Request $request)
+    {
+        $id = $request->id;
+        DB::table('food_ingridient')->where('food_id', $id)->delete();
+        $photo = Food::select('photo')->where('id', $id)->value('photo');
+
+        if (file_exists($photo)) {
+            unlink($photo);
+        }
+        Food::where('id', $id)->delete();
+
+
+
+        $foods = $this->getFoods();
+        $role = $this->getRole($request);
         $temp = $this->getModal($request);
         $del = $temp[0];
         $ingridientsIn = $temp[1];

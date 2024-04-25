@@ -30,6 +30,7 @@ Route::post('/changeName', [HomeController::class, "changeName"]);
 Route::post('/changeCost', [HomeController::class, "changeCost"]);
 Route::get('/changeName', [HomeController::class, "changeName"]);
 Route::get('/changeCost', [HomeController::class, "changeCost"]);
+Route::get('/deleteFood', [HomeController::class, "deleteFood"]);
 
 Route::post('/NewFood', [HomeController::class, "getModalForAddNewFood"]);
 Route::get('/NewFood', [HomeController::class, "getModalForAddNewFood"]);
@@ -39,17 +40,17 @@ Route::post('/orders/change', [StatusController::class, "changeStatus"])->name('
 Route::post('orders/next', [StatusController::class, "setNextStatus"])->name('orders.next');
 
 
-Route::get('welcome', function() {
-return view('welcome');
+Route::get('welcome', function () {
+    return view('welcome');
 });
 
-Route::get('login', function() {
+Route::get('login', function () {
     return view('login');
 })->name('login')->middleware('login');
 
 Route::post('login', [LoginController::class, "login"]);
 
-Route::get('register', function() {
+Route::get('register', function () {
     return view('register');
 })->middleware('login');
 
@@ -63,7 +64,7 @@ Route::get('/cart', [cartController::class, 'showCart'])->name('cart.show')->mid
 Route::post('/cart/clear', [cartController::class, 'clearCart'])->name('cart.clear');
 Route::post('/cart/remove', [cartController::class, 'removeFromCart'])->name('cart.remove');
 
-Route::get('/lk',[lkController::class, 'getInfo'])->name('lk')->middleware('jwt');
+Route::get('/lk', [lkController::class, 'getInfo'])->name('lk')->middleware('jwt');
 
 Route::get('logout', [LoginController::class, "logout"]);
 
