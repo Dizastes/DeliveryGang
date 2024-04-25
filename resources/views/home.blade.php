@@ -12,9 +12,13 @@
 
 <body>
 	<header>
-		<form action="/NewFood" method = 'post'>
-			@csrf
-		<button type = 'submit'>+</button>
+		@if (!(isset($modal)))
+		<form action="/NewFood" method='post'>
+		@csrf
+		@else
+		<form action="/" method='get'>
+		@endif
+		<button type='submit'>+</button>
 		</form>
 	</header>
 	<main>
@@ -31,7 +35,7 @@
 					<input type="text" name='category'>
 					<p>Состав: </p>
 					@foreach($ingridients as $ingridient)
-						<p>{{$ingridient[0]->name}}</p>
+					<p>{{$ingridient[0]->name}}</p>
 					@endforeach
 					<p></p>
 					<p>Цена: </p>
@@ -86,14 +90,20 @@
 		</div>
 		@if($role == 3 and isset($del['name']))
 		<div class='modal3123123'>
-			<form class='modal_form' action="/edit" method="post">
+			<form class='modal_form' action="/changeName" method="post">
+				@csrf
 				<input type="hidden" name='id' value="{{$del['id']}}">
-				<input type="text" value={{$del['name']}}>
-				<p>Состав:</p>
-				<p>{{$del['ingridients']}}</p>
-				<input type="text" value={{$del['cost']}}>
+				<input type="text" name='name' value={{$del['name']}}>
 				<button type='submit'>O</button>
 			</form>
+			<form class='modal_form' action="/changeCost" method="post">
+				@csrf
+				<input type="hidden" name='id' value="{{$del['id']}}">
+				<input type="text" name='cost' value={{$del['cost']}}>
+				<button type='submit'>O</button>
+			</form>
+			<p>Состав:</p>
+			<p>{{$del['ingridients']}}</p>
 			<form action="addIngridient" method='post'>
 				@csrf
 				<input type="hidden" name='id' value="{{$del['id']}}">

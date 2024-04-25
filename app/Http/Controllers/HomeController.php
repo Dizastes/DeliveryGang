@@ -240,5 +240,39 @@ class HomeController extends Controller
 
         return view('home', ['foods' => $foods, 'role' => $role]);
     }
+
+    public function changeName(Request $request) 
+    {
+        $id = $request->input('id');
+        $name = $request->input('name');
+        Food::updateOrCreate(['id' => $id],['name' => $name]);
+
+        $foods = $this->getFoods();
+        $role = $this->getRole($request);
+
+        $temp = $this->getModal($request);
+        $del = $temp[0];
+        $ingridientsIn = $temp[1];
+        $ingridients = $temp[2];
+
+        return view('home', ['foods' => $foods, 'role' => $role, 'del' => $del, 'ingridientsIn' => $ingridientsIn, 'ingridients' => $ingridients]);
+    }
+
+    public function changeCost(Request $request) 
+    {
+        $id = $request->input('id');
+        $cost = $request->input('cost');
+        Food::updateOrCreate(['id' => $id],['cost' => $cost]);
+
+        $foods = $this->getFoods();
+        $role = $this->getRole($request);
+
+        $temp = $this->getModal($request);
+        $del = $temp[0];
+        $ingridientsIn = $temp[1];
+        $ingridients = $temp[2];
+
+        return view('home', ['foods' => $foods, 'role' => $role, 'del' => $del, 'ingridientsIn' => $ingridientsIn, 'ingridients' => $ingridients]);
+    }
     
 }

@@ -26,6 +26,8 @@ Route::post('/addNewIngridient', [HomeController::class, "addIngridientNewFood"]
 Route::post('/deleteIngridient', [HomeController::class, "deleteIngridient"]);
 Route::post('/deleteNewIngridient', [HomeController::class, "deleteIngridientNewFood"]);
 Route::post('/addNewFood', [HomeController::class, "AddNewFood"]);
+Route::post('/changeName', [HomeController::class, "ChangeName"]);
+Route::post('/changeCost', [HomeController::class, "ChangeCost"]);
 
 Route::post('/NewFood', [HomeController::class, "getModalForAddNewFood"]);
 
