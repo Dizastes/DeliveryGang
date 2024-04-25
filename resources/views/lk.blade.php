@@ -4,6 +4,7 @@
 <head>
     @include('templates.include')
     <title>Document</title>
+    <script src="https://js.pusher.com/7.0/pusher.min.js"></script>
 </head>
 
 <body>
@@ -51,6 +52,18 @@
         </div>
     </main>
     @include('templates.footer')
+    <script>
+        var pusher = new Pusher('e4af738018f4c430d7fb', {
+          cluster: 'eu'
+        });
+
+        var channel = pusher.subscribe('order-accepted-channel');
+        channel.bind('App\\Events\\OrderAccepted', function(data) {
+      // Здесь вы можете обработать данные, переданные событием
+          // console.log('Received data:', data);
+          window.location.reload();
+        });
+    </script>
 </body>
 
 </html>
