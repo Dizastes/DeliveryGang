@@ -48,19 +48,12 @@
                 @endforeach
             </div>
         </nav>
-        @if(isset($fullInfo))
-        	<p>{{$fullInfo[0]->name}}</p>
-        	<img src="{{$fullInfo[0]->photo}}" alt="">
-        	<p>{{$fullInfo[0]->ingridients}}</p>
-        	<p>{{$fullInfo[0]->cost .' ₽'}}</p>
-        	<p></p>
-        @endif
         <div class="adv"> <img src="{{ asset('images/банер 3.png') }}"></img></div>
         <div class="main_block"> <!-- основной блок с товарами -->
 
             @if ($role == 3 and isset($modal))
 
-                <div class="modal fade" id="modal-window" tabindex="-1" aria-labelledby="exampleModalLabel"
+                <div class="modal fade" id="fullInfo-window" tabindex="-1" aria-labelledby="exampleModalLabel"
                     aria-hidden="true">
                     <div class="modal-dialog">
                         <div class="modal-content">
@@ -142,7 +135,8 @@
                                 @csrf
                             @endif
                             <input type="hidden" name='id' value="{{ $food->id }}">
-                            <a href="/showInfo?id={{$food->id}}"><img class="main-img" src="{{ asset($food->photo) }}"></a>
+                            <a href="/showInfo?id={{ $food->id }}"><img class="main-img"
+                                    src="{{ asset($food->photo) }}"></a>
                             <h1>{{ $food->name }}</h1>
                             <h3>{{ $food->ingridients }}</h3>
                             <div class="coster">
@@ -160,6 +154,34 @@
                 </div>
             @endforeach
         </div>
+        @if (isset($fullInfo))
+            <div class="modal fade" id="fullInfo-window" tabindex="-1" aria-labelledby="exampleModalLabel"
+                aria-hidden="true">
+                <div class="modal-dialog modal-xl">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">{{ $fullInfo[0]->name }}</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                aria-label="Закрыть"></button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="fullinformation">
+                                <img src="{{ $fullInfo[0]->photo }}" alt="">
+                                <div class="foodinfo">
+                                    <h2>{{ $fullInfo[0]->name }}</h2>
+                                    <h5>{{ $fullInfo[0]->ingridients }}</h5>
+                                </div>
+                            </div>
+                            <p class="money-count">{{ $fullInfo[0]->cost . ' ₽' }}</p>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"
+                                style="height: max-content">Закрыть</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        @endif
         @if ($role == 3 and isset($del['name']))
             <div class="modal fade" id="change-window" tabindex="-1" aria-labelledby="exampleModalLabel"
                 aria-hidden="true">
@@ -227,6 +249,7 @@
 
 
     @if (isset($modal))
+        console.log(1)
         var myModal = new bootstrap.Modal(document.getElementById('modal-window'), {
             keyboard: false
         })
@@ -234,12 +257,23 @@
     @endif
 
     @if (isset($del['name']))
+        console.log(2)
         var myModal = new bootstrap.Modal(document.getElementById('change-window'), {
             keyboard: false
         })
         myModal.show();
     @endif
 
+    @if (isset($fullInfo[0]->name))
+        console.log(3)
+        var myModala = new bootstrap.Modal(document.getElementById('fullInfo-window'), {
+            keyboard: false
+        })
+        myModala.show();
+        myModala._element.addEventListener('hide.bs.modal', function(event) {
+            window.location.href = '/';
+        });
+    @endif
 
 
     window.addEventListener('scroll', function() {
