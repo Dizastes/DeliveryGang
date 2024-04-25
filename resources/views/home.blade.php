@@ -4,6 +4,14 @@
 <head>
     @include('templates.include')
     <title>DeliveryGang</title>
+    <script>
+        window.onload = function () {
+           window.scrollTo(0, +localStorage.getItem('page_scroll'));
+           document.addEventListener('scroll', function () {
+              localStorage.setItem('page_scroll', window.pageYOffset);
+           });
+        }
+    </script>
 </head>
 
 <body>
@@ -242,6 +250,24 @@
         @endif
     </main>
     @include('templates.footer')
+    <input type="text" id="searchInput">
+    <button onclick="search()">Поиск</button>
+
+    <script>
+        function search() {
+            var searchTerm = document.getElementById('searchInput').value;
+            // Здесь вы можете выполнить логику поиска с использованием searchTerm
+            // Например, если searchTerm - это якорь, вы можете использовать window.location.hash
+            window.location.hash = searchTerm;
+        }
+
+        // Эта функция позволяет нажимать Enter для запуска поиска
+        document.getElementById('searchInput').addEventListener('keyup', function(event) {
+            if (event.key === 'Enter') {
+                search();
+            }
+        });
+    </script>
 </body>
 
 <script>
