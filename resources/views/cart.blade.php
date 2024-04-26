@@ -168,18 +168,30 @@
                     <div class="container d-flex flex-column align-items-left">
                         <label for="">Улица</label>
                         <input type="text" name='street'>
+                        @error('street')
+                            {{ $message }}
+                        @enderror
                     </div>
                     <div class="container d-flex flex-column align-items-left">
                         <label for="">Дом</label>
                         <input type="text" name='houseNum'>
+                        @error('houseNum')
+                            {{ $message }}
+                        @enderror
                     </div>
                     <div class="container d-flex flex-column align-items-left">
                         <label for="">Подъезд</label>
                         <input type="text" name='entrance'>
+                        @error('entrance')
+                            {{ $message }}
+                        @enderror
                     </div>
                     <div class="container d-flex flex-column align-items-left">
                         <label for="">Квартира</label>
                         <input type="text" name='apartment'>
+                        @error('apartment')
+                            {{ $message }}
+                        @enderror
                     </div>
                     <div class="container d-flex flex-column align-items-left comment-to-order">
                         <label for="">Комментарий к заказу</label>
@@ -187,7 +199,7 @@
                     </div>
                     <div class="container d-flex flex-row time-to-delivery">
                         <label for="">Время доставки</label>
-                        <input type="time" name='time'>
+                        <input type="time" name='time' id='timeInput'>
                     </div>
                     <input type="hidden" name='cost' value={{ $totalCost }}>
                     <button type='submit' class="order-status"
@@ -202,5 +214,19 @@
 </main>
 @include('templates.footer')
 </body>
+<script>
+    window.onload = function() {
+  var currentTime = new Date(); 
+  var nextHour = new Date(currentTime.getTime() + 60 * 60 * 1000); 
+  var hours = nextHour.getHours().toString().padStart(2, '0'); 
+  var minutes = nextHour.getMinutes().toString().padStart(2, '0'); 
+  var formattedTime = hours + ':' + minutes; 
+  document.getElementById('timeInput').value = formattedTime;
+
+  var minTime = hours + ':' + minutes; 
+  document.getElementById('timeInput').setAttribute('min', minTime); 
+  document.getElementById('timeInput').setAttribute('max', '22:00'); 
+};
+</script>
 
 </html>

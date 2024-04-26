@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\DB;
 use App\Events\OrderAccepted;
+use App\Http\Requests\newOrderRequest;
 
 
 class cartController extends Controller
@@ -109,7 +110,7 @@ class cartController extends Controller
         return redirect()->route('cart.show');
     }
 
-    public function addOrder(Request $request)
+    public function addOrder(newOrderRequest $request)
     {
         $order = new Orders();
 
