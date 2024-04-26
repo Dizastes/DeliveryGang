@@ -263,12 +263,14 @@
             block: 'center'
         });
     }
-    document.getElementById('searchInput').addEventListener('keyup', function(event) {
-        if (event.key === 'Enter') {
-            search();
-        }
-    });
 
+    if(document.getElementById('searchInput')){
+        document.getElementById('searchInput').addEventListener('keyup', function(event) {
+            if (event.key === 'Enter') {
+                search();
+            }
+        });
+    }
     @if (isset($modal))
         console.log(1)
         var myModal = new bootstrap.Modal(document.getElementById('modal-window'), {
