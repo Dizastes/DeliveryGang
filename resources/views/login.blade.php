@@ -20,6 +20,9 @@
     <main>
         <form action="login" method="post" class="register-form">
             @csrf
+            @if (isset($mes))
+                <h5 style="margin:1% auto">{{ $mes }}</h5>
+            @endif
             <div class="container">
                 <input class="row" type="text" name="login" placeholder="логин">
                 @error('login')

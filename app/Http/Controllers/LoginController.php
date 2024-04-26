@@ -18,7 +18,7 @@ class LoginController extends Controller
 	{
 		// $userData = $request->only(['login', 'password']);
 		if (!$token = Auth::attempt(['login' => $request->login, 'password' => $request->password])) {
-			return response()->json(['error' => 'Unauthorized'], 401);
+			return view('login', ['mes' => 'Неверный логин или пароль']);
 		}
 		return $this->respondWithToken($token);
 	}
